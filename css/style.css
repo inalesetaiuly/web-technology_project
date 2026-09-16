@@ -118,3 +118,25 @@ footer {
     padding: 15px;
     margin-top: 30px;
 }
+.team-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
+}
+.team-member {
+    text-align: center;
+    width: 300px;
+}
+.team-member img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.team-member h3 {
+    margin-top: 15px;
+}
+.team-member p {
+    line-height: 1.5;
+}
