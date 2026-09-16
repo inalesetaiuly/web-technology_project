@@ -17,6 +17,18 @@ nav {
     padding: 15px;
 }
 
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    display: inline;
+}
+
 nav a {
     color: white;
     text-decoration: none;
@@ -89,7 +101,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
     padding: 10px;
     border: 1px solid #bbb;
     border-radius: 5px;
@@ -118,28 +131,34 @@ footer {
     padding: 15px;
     margin-top: 30px;
 }
+
 .team-container {
     display: flex;
     justify-content: center;
     gap: 50px;
     margin-top: 30px;
 }
+
 .team-member {
     text-align: center;
     width: 300px;
 }
+
 .team-member img {
     width: 180px;
     height: 180px;
     object-fit: cover;
     border-radius: 50%;
 }
+
 .team-member h3 {
     margin-top: 15px;
 }
+
 .team-member p {
     line-height: 1.5;
 }
+
 #resources-section {
     margin-top: 20px;
 }
