@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Campus Life | Contact</title>
@@ -9,13 +10,96 @@
 
 <body>
 
-<header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="resources.html">Resources</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
 
-    <h1>Contact Us</h1>
-</header>
+        <h1>Contact Us</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Campus Directory</h2>
+            <p>Contact information for campus departments and student services:</p>
+
+            <table>
+                <tr>
+                    <th>Department</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Location</th>
+                </tr>
+                <tr>
+                    <td>Student Affairs</td>
+                    <td>studentaffairs@campus.edu</td>
+                    <td>+7 (717) 11-22-33</td>
+                    <td>Main Building, Room 201</td>
+                </tr>
+                <tr>
+                    <td>IT Support Desk</td>
+                    <td>support@campus.edu</td>
+                    <td>+7 (717) 11-22-34</td>
+                    <td>Science Wing, Room 105</td>
+                </tr>
+                <tr>
+                    <td>Library Help Desk</td>
+                    <td>library@campus.edu</td>
+                    <td>+7 (717) 11-22-35</td>
+                    <td>Library Building, 1st Floor</td>
+                </tr>
+                <tr>
+                    <td>Academic Advisory</td>
+                    <td>advisory@campus.edu</td>
+                    <td>+7 (717) 11-22-36</td>
+                    <td>Academic Block, Room 310</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Get in Touch</h2>
+            <p>Fill out the form below to send us a message or ask a question:</p>
+
+            <form action="#" method="post"
+                onsubmit="alert('Thank you! Your message has been sent successfully.'); this.reset(); return false;">
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" required placeholder="Enter your full name">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required placeholder="Enter subject">
+
+                <label for="category">Topic / Department:</label>
+                <select id="category" name="category" required>
+                    <option value="">-- Select an option --</option>
+                    <option value="general">General Question</option>
+                    <option value="it_support">IT Support</option>
+                    <option value="library">Library Resources</option>
+                    <option value="academic">Academic Advisory</option>
+                    <option value="feedback">Feedback</option>
+                </select>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required
+                    placeholder="Write your message here..."></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Team members: Yessetaiuly Inal, Nurkeldi Baizhigit</p>
+    </footer>
+
+</body>
+
+</html>
