@@ -159,22 +159,26 @@ footer {
     line-height: 1.5;
 }
 
-#resources-section {
+#resources-section,
+#contact-section {
     margin-top: 20px;
 }
-.resource-intro {
+.resource-intro,
+.contact-intro {
     display: flex;
     align-items: center;
     gap: 21px;
-    margin:20px 0 30px 0;
+    margin: 20px 0 30px 0;
 }
-.resource-intro img {
+.resource-intro img,
+.contact-intro img {
     width: 300px;
     height: 200px;
     object-fit: cover;
     border-radius: 8px;
 }
-.resource-intro p {
+.resource-intro p,
+.contact-intro p {
     line-height: 1.6;
     font-size: 16px;
 }
