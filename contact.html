@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Life | Contact</title>
 
     <link rel="stylesheet" href="css/style.css">
@@ -10,13 +11,14 @@
 
 <body>
 
-    <header>
+    <header class="site-header">
+        <a href="index.html" class="logo">Campus Life</a>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="resources.html">Resources</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -24,7 +26,7 @@
     <main>
         <h1 class="page-title">Contact Us</h1>
         <section id="contact-section">
-            <h2>Campus Directory</h2>
+            <h2><span class="section-icon" aria-hidden="true">✉️</span> Campus Directory</h2>
 
             <div class="contact-intro">
                 <img src="images/contact.jpg" alt="University student support and information desk">
@@ -70,7 +72,7 @@
         </section>
 
         <section>
-            <h2>Get in Touch</h2>
+            <h2><span class="section-icon" aria-hidden="true">💬</span> Get in Touch</h2>
             <p>Fill out the form below to send us a message or ask a question:</p>
 
             <form action="#" method="post"

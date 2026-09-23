@@ -1,19 +1,30 @@
+:root {
+    --navy-950: #071a33;
+    --navy-900: #0b2545;
+    --navy-700: #174a7a;
+    --surface: #ffffff;
+    --page-background: #eef3f8;
+    --text: #14213d;
+    --border: #d6e0ea;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #f4f6f8;
-    color: #333;
+    background-color: var(--page-background);
+    color: var(--text);
 }
 
 .site-header {
-    background-color: #141414;
+    background: linear-gradient(135deg, var(--navy-950), var(--navy-900));
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 10%;
+    box-shadow: 0 3px 12px rgba(7, 26, 51, 0.24);
 }
 .page-title {
-    color: #2c5f8a;
+    color: var(--navy-900);
     text-align: center;
     margin-bottom: 30px;
 }
@@ -25,7 +36,8 @@ body {
     font-weight: bold;
 }
 nav {
-    background-color: #1f4565;
+    background-color: rgba(35, 105, 166, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     padding: 15px;
 }
 
@@ -47,7 +59,14 @@ nav a {
 }
 
 nav a:hover {
-    text-decoration: underline;
+    color: #dceeff;
+    text-decoration: none;
+}
+
+nav a.active {
+    border-bottom: 2px solid #ffffff;
+    font-weight: bold;
+    padding-bottom: 5px;
 }
 
 header h1 {
@@ -61,14 +80,16 @@ main {
 }
 
 section {
-    background-color: white;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 14px rgba(11, 37, 69, 0.06);
     padding: 25px;
     margin-bottom: 25px;
     border-radius: 8px;
 }
 
 h2 {
-    color: #2c5f8a;
+    color: var(--navy-900);
     text-align: center;
 }
 
@@ -87,7 +108,7 @@ table {
 table,
 th,
 td {
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
 }
 
 th,
@@ -97,7 +118,7 @@ td {
 }
 
 th {
-    background-color: #2c5f8a;
+    background-color: var(--navy-900);
     color: white;
 }
 
@@ -116,15 +137,23 @@ input,
 textarea,
 select {
     padding: 10px;
-    border: 1px solid #bbb;
+    border: 1px solid #afc2d5;
     border-radius: 5px;
     font-size: 16px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--navy-700);
+    box-shadow: 0 0 0 3px rgba(23, 74, 122, 0.16);
+    outline: none;
 }
 
 button {
     margin-top: 20px;
     padding: 12px;
-    background-color: #2c5f8a;
+    background-color: var(--navy-900);
     color: white;
     border: none;
     border-radius: 5px;
@@ -133,11 +162,11 @@ button {
 }
 
 button:hover {
-    background-color: #1f4565;
+    background-color: var(--navy-700);
 }
 
 footer {
-    background-color: #1f4565;
+    background-color: var(--navy-950);
     color: white;
     text-align: center;
     padding: 15px;
@@ -211,8 +240,8 @@ footer {
     display: flex;
     flex-direction: column;
 
-    background-color: white;
-    border: 1px solid #ddd;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 10px;
 
     padding: 15px;
@@ -228,8 +257,21 @@ footer {
 }
 
 .card h3 {
-    color: #2c5f8a;
+    color: var(--navy-900);
     margin-bottom: 10px;
+}
+
+.card-icon,
+.section-icon {
+    margin-right: 4px;
+}
+
+.home-hero {
+    background: linear-gradient(135deg, var(--navy-950), var(--navy-700));
+    border-radius: 12px;
+    color: white;
+    margin: 30px auto;
+    padding: 28px 20px;
 }
 
 .card p {
@@ -242,7 +284,7 @@ footer {
     margin-top: auto;
     padding: 10px 15px;
 
-    background-color: #2c5f8a;
+    background-color: var(--navy-900);
     color: white;
 
     text-decoration: none;
@@ -252,12 +294,12 @@ footer {
 }
 
 .card-button:hover {
-    background-color: #1f4565;
+    background-color: var(--navy-700);
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 22px rgba(11, 37, 69, 0.16);
 }
 .page-grid {
     display: grid;
@@ -288,7 +330,8 @@ footer {
 }
 .sidebar {
     grid-area: sidebar;
-    background-color: white;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
     padding: 20px;
     margin-left: 20px;
     border-radius: 8px;
@@ -296,7 +339,7 @@ footer {
 }
 
 .sidebar h3 {
-    color: #2c5f8a;
+    color: var(--navy-900);
     margin-top: 0;
 }
 
@@ -307,7 +350,7 @@ footer {
 
 .sidebar li {
     padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border);
 }
 .gallery-section h2 {
     text-align: center;
@@ -345,7 +388,7 @@ footer {
     left: 0;
     right: 0;
 
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(7, 26, 51, 0.88);
     color: white;
 
     text-align: center;
@@ -357,4 +400,108 @@ footer {
 }
 .gallery-item:hover img {
     transform: scale(1.05);
+}
+
+.gallery-item:hover .caption {
+    opacity: 1;
+}
+
+@media (max-width: 700px) {
+    .site-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    nav {
+        padding: 12px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 20px;
+    }
+
+    nav a.active {
+        padding-bottom: 3px;
+    }
+
+    main {
+        width: auto;
+        margin: 20px 16px;
+    }
+
+    section {
+        padding: 18px;
+    }
+
+    .page-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main"
+            "footer";
+        gap: 16px;
+    }
+
+    .sidebar {
+        margin: 0 16px;
+    }
+
+    .main-content {
+        margin: 0 16px;
+    }
+
+    .team-container,
+    .card-container,
+    .resource-intro,
+    .contact-intro {
+        flex-direction: column;
+    }
+
+    .team-member,
+    .resource-intro img,
+    .contact-intro img {
+        width: 100%;
+    }
+
+    .resource-intro img,
+    .contact-intro img {
+        height: auto;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    input,
+    textarea,
+    select {
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+@media (max-width: 420px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .page-title {
+        font-size: 1.7rem;
+    }
 }
