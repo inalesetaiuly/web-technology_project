@@ -1,114 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Campus Life | Contact</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-lg site-navbar" data-bs-theme="dark">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="index.html">Campus Life</a>
 
-    <header class="site-header">
-        <a href="index.html" class="logo">Campus Life</a>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="resources.html">Resources</a></li>
-                <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
-            </ul>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <h1 class="page-title">Contact Us</h1>
-        <section id="contact-section">
-            <h2><span class="section-icon" aria-hidden="true">✉️</span> Campus Directory</h2>
+    <main class="container flex-grow-1 py-4">
+        <h1 class="page-title mb-4">Contact Us</h1>
 
-            <div class="contact-intro">
-                <img src="images/contact.jpg" alt="University student support and information desk">
-                <p>
-                    Have questions or need assistance? Reach out to our campus departments,
-                    visit our student support desk, or send us a message through the form below.
-                    Our staff and student advisors are always ready to help!
-                </p>
+        <section id="contact-section" class="section-panel p-4 mb-4" aria-labelledby="directory-title">
+            <h2 id="directory-title"><span class="section-icon" aria-hidden="true">✉️</span> Campus Directory</h2>
+
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-12 col-lg-5">
+                    <img class="img-fluid rounded" src="images/contact.jpg"
+                        alt="University student support and information desk">
+                </div>
+                <div class="col-12 col-lg-7">
+                    <p class="mb-0">
+                        Have questions or need assistance? Reach out to our campus departments, visit our student support
+                        desk, or send us a message through the form below. Our staff and student advisors are always ready to help!
+                    </p>
+                </div>
             </div>
 
-            <table>
-                <tr>
-                    <th>Department</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Location</th>
-                </tr>
-                <tr>
-                    <td>Student Affairs</td>
-                    <td>studentaffairs@campus.edu</td>
-                    <td>+7 (717) 11-22-33</td>
-                    <td>Main Building, Room 201</td>
-                </tr>
-                <tr>
-                    <td>IT Support Desk</td>
-                    <td>support@campus.edu</td>
-                    <td>+7 (717) 11-22-34</td>
-                    <td>Science Wing, Room 105</td>
-                </tr>
-                <tr>
-                    <td>Library Help Desk</td>
-                    <td>library@campus.edu</td>
-                    <td>+7 (717) 11-22-35</td>
-                    <td>Library Building, 1st Floor</td>
-                </tr>
-                <tr>
-                    <td>Academic Advisory</td>
-                    <td>advisory@campus.edu</td>
-                    <td>+7 (717) 11-22-36</td>
-                    <td>Academic Block, Room 310</td>
-                </tr>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <caption>Campus departments and contact details</caption>
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Department</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Student Affairs</th>
+                            <td><a href="mailto:studentaffairs@campus.edu">studentaffairs@campus.edu</a></td>
+                            <td><a href="tel:+7717112233">+7 (717) 11-22-33</a></td>
+                            <td>Main Building, Room 201</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">IT Support Desk</th>
+                            <td><a href="mailto:support@campus.edu">support@campus.edu</a></td>
+                            <td><a href="tel:+7717112234">+7 (717) 11-22-34</a></td>
+                            <td>Science Wing, Room 105</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Library Help Desk</th>
+                            <td><a href="mailto:library@campus.edu">library@campus.edu</a></td>
+                            <td><a href="tel:+7717112235">+7 (717) 11-22-35</a></td>
+                            <td>Library Building, 1st Floor</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Academic Advisory</th>
+                            <td><a href="mailto:advisory@campus.edu">advisory@campus.edu</a></td>
+                            <td><a href="tel:+7717112236">+7 (717) 11-22-36</a></td>
+                            <td>Academic Block, Room 310</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
-        <section>
-            <h2><span class="section-icon" aria-hidden="true">💬</span> Get in Touch</h2>
+        <section class="section-panel p-4" aria-labelledby="message-title">
+            <h2 id="message-title"><span class="section-icon" aria-hidden="true">💬</span> Get in Touch</h2>
             <p>Fill out the form below to send us a message or ask a question:</p>
 
-            <form action="#" method="post"
-                onsubmit="alert('Thank you! Your message has been sent successfully.'); this.reset(); return false;">
-                <label for="fullname">Full Name:</label>
-                <input type="text" id="fullname" name="fullname" required placeholder="Enter your full name">
+            <form action="#" method="post">
+                <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="fullname">Full Name</label>
+                        <input class="form-control" type="text" id="fullname" name="fullname"
+                            placeholder="Enter your full name" autocomplete="name" required>
+                    </div>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="email">Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text" aria-hidden="true">@</span>
+                            <input class="form-control" type="email" id="email" name="email"
+                                placeholder="Enter your email" autocomplete="email" required>
+                        </div>
+                    </div>
 
-                <label for="subject">Subject:</label>
-                <input type="text" id="subject" name="subject" required placeholder="Enter subject">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="subject">Subject</label>
+                        <input class="form-control" type="text" id="subject" name="subject"
+                            placeholder="Enter subject" required>
+                    </div>
 
-                <label for="category">Topic / Department:</label>
-                <select id="category" name="category" required>
-                    <option value="">-- Select an option --</option>
-                    <option value="general">General Question</option>
-                    <option value="it_support">IT Support</option>
-                    <option value="library">Library Resources</option>
-                    <option value="academic">Academic Advisory</option>
-                    <option value="feedback">Feedback</option>
-                </select>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="category">Topic / Department</label>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="" selected disabled>-- Select an option --</option>
+                            <option value="general">General Question</option>
+                            <option value="it_support">IT Support</option>
+                            <option value="library">Library Resources</option>
+                            <option value="academic">Academic Advisory</option>
+                            <option value="feedback">Feedback</option>
+                        </select>
+                    </div>
 
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="5" required
-                    placeholder="Write your message here..."></textarea>
+                    <div class="col-12">
+                        <label class="form-label" for="message">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="5"
+                            placeholder="Write your message here..." required></textarea>
+                    </div>
 
-                <button type="submit">Send Message</button>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="yes" id="followup" name="followup">
+                            <label class="form-check-label" for="followup">I would like a reply by email.</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="btn-group" role="group" aria-label="Form actions">
+                            <button class="btn btn-primary btn-lg" type="submit">Send Message</button>
+                            <button class="btn btn-outline-secondary btn-lg" type="reset">Clear Form</button>
+                        </div>
+                    </div>
+                </div>
             </form>
         </section>
     </main>
 
-    <footer>
-        <p>Team members: Yessetaiuly Inal, Nurkeldi Baizhigit</p>
+    <footer class="site-footer mt-auto py-3">
+        <div class="container text-center">
+            <p class="mb-0">Team members: Yessetaiuly Inal, Nurkeldi Baizhigit</p>
+        </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
