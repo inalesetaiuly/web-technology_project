@@ -1,0 +1,47 @@
+# Campus Life
+
+Campus Life is a responsive student guide website created for the Web Technologies course.
+
+## About the Project
+
+The website helps students find useful information about:
+
+- Study tips
+- Campus resources
+- Student activities
+- Contact information
+
+## Pages
+
+- Home
+- About Us
+- Resources
+- Contact
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- Flexbox
+- CSS Grid
+- Media Queries
+- Bootstrap 5
+
+## Features
+
+- Responsive design for desktop, tablet, and mobile
+- Bootstrap navigation bar
+- Responsive grid layout
+- Bootstrap buttons and cards
+- Image carousel
+- Responsive contact form
+- Accessible semantic HTML
+
+## Team Members
+
+- Yessetaiuly Inal
+- Nurkeldi Baizhigit
+
+## Live Website
+
+Add your GitHub Pages link here.
