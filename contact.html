@@ -7,7 +7,7 @@
     <meta name="description" content="Campus Life: a student guide to study spaces, campus resources and student community.">
     <title>Campus Life | Contact</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -96,19 +96,20 @@
             </div>
         </section>
 
-        <section class="section-panel p-4" aria-labelledby="message-title">
+        <section id="message-section" class="section-panel p-4" aria-labelledby="message-title">
             <h2 id="message-title"><span class="section-icon" aria-hidden="true">💬</span> Get in Touch</h2>
-            <p>Try the demo form below. It checks required fields in your browser; messages are not sent or stored.</p>
+            <p>Try the demo form below, including a practice password and its confirmation. No account is created and nothing is sent or stored.</p>
 
             <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
             <noscript><p class="alert alert-warning">Enable JavaScript to try the form demonstration. No messages can be delivered by this static website.</p></noscript>
-            <form id="contact-form" aria-describedby="form-note" novalidate>
+            <form id="contact-form" aria-describedby="form-note" data-validate novalidate>
                 <p id="form-note" class="small">All fields except the reply checkbox are required.</p>
                 <div class="row g-3">
                     <div class="col-12 col-md-6">
                         <label class="form-label" for="fullname">Full Name</label>
                         <input class="form-control" type="text" id="fullname" name="fullname"
-                            placeholder="Enter your full name" autocomplete="name" required>
+                            placeholder="Enter your full name" autocomplete="name" aria-describedby="fullname-error" required>
+                        <p id="fullname-error" class="field-error" hidden></p>
                     </div>
 
                     <div class="col-12 col-md-6">
@@ -116,19 +117,21 @@
                         <div class="input-group">
                             <span class="input-group-text" aria-hidden="true">@</span>
                             <input class="form-control" type="email" id="email" name="email"
-                                placeholder="Enter your email" autocomplete="email" required>
+                                placeholder="Enter your email" autocomplete="email" aria-describedby="email-error" required>
                         </div>
+                        <p id="email-error" class="field-error" hidden></p>
                     </div>
 
                     <div class="col-12 col-md-6">
                         <label class="form-label" for="subject">Subject</label>
                         <input class="form-control" type="text" id="subject" name="subject"
-                            placeholder="Enter subject" required>
+                            placeholder="Enter subject" aria-describedby="subject-error" required>
+                        <p id="subject-error" class="field-error" hidden></p>
                     </div>
 
                     <div class="col-12 col-md-6">
                         <label class="form-label" for="category">Topic / Department</label>
-                        <select class="form-select" id="category" name="category" required>
+                        <select class="form-select" id="category" name="category" aria-describedby="category-error" required>
                             <option value="" selected disabled>-- Select an option --</option>
                             <option value="general">General Question</option>
                             <option value="it_support">IT Support</option>
@@ -136,12 +139,29 @@
                             <option value="academic">Academic Advisory</option>
                             <option value="feedback">Feedback</option>
                         </select>
+                        <p id="category-error" class="field-error" hidden></p>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="password">Practice password</label>
+                        <input class="form-control" type="password" id="password" name="password" minlength="8"
+                            autocomplete="new-password" aria-describedby="password-help password-error" required>
+                        <p id="password-help" class="small mt-1 mb-0">At least 8 characters. Use a made-up password for this demo.</p>
+                        <p id="password-error" class="field-error" hidden></p>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="confirm-password">Confirm practice password</label>
+                        <input class="form-control" type="password" id="confirm-password" name="confirmPassword"
+                            autocomplete="new-password" data-match="password" aria-describedby="confirm-password-error" required>
+                        <p id="confirm-password-error" class="field-error" hidden></p>
                     </div>
 
                     <div class="col-12">
                         <label class="form-label" for="message">Message</label>
                         <textarea class="form-control" id="message" name="message" rows="5"
-                            placeholder="Write your message here..." required></textarea>
+                            placeholder="Write your message here..." aria-describedby="message-error" required></textarea>
+                        <p id="message-error" class="field-error" hidden></p>
                     </div>
 
                     <div class="col-12">
@@ -158,38 +178,41 @@
                         </div>
                     </div>
                 </div>
-                <p id="form-status" role="status" class="mt-3"></p>
             </form>
+        </section>
+
+        <section id="newsletter-section" class="section-panel p-4 mt-4" aria-labelledby="newsletter-title">
+            <p class="tool-label">Stay in the loop</p>
+            <h2 id="newsletter-title">Campus Newsletter</h2>
+            <p>Try a quick subscription to updates on student events and resources.</p>
+            <button type="button" id="open-popup" class="btn btn-primary" aria-haspopup="dialog">Subscribe</button>
         </section>
     </main>
 
-    <section class="section-panel p-4 mt-4">
-        <h2>Campus Newsletter</h2>
-        <button type="button" id="open-popup" class="btn btn-primary">
-            Subscribe
-        </button>
-    </section>
+    <dialog id="subscribe-popup" class="subscription-dialog" aria-labelledby="popup-title" aria-describedby="popup-note">
+        <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+            <h2 id="popup-title" class="h3 mb-0">Subscribe to campus news</h2>
+            <button type="button" id="close-popup" class="dialog-close" aria-label="Close subscription form">&times;</button>
+        </div>
+        <p id="popup-note">Demo form: no data will be sent or stored.</p>
 
-    <dialog id="subscribe-popup" aria-labelledby="popup-title">
-        <h2 id="popup-title">Subscribe to campus news</h2>
-        <p>Demo form: no data will be sent or stored.</p>
-
-        <form method="dialog">
+        <form id="subscription-form" data-validate novalidate>
             <div class="mb-3">
                 <label for="subscriber-name" class="form-label">Name</label>
                 <input id="subscriber-name" name="name"
-                       class="form-control" type="text" required>
+                       class="form-control" type="text" autocomplete="name" aria-describedby="subscriber-name-error" required>
+                <p id="subscriber-name-error" class="field-error" hidden></p>
             </div>
 
             <div class="mb-3">
                 <label for="subscriber-email" class="form-label">Email</label>
                 <input id="subscriber-email" name="email"
-                       class="form-control" type="email" required>
+                       class="form-control" type="email" autocomplete="email" aria-describedby="subscriber-email-error" required>
+                <p id="subscriber-email-error" class="field-error" hidden></p>
             </div>
 
-            <button type="submit" class="btn btn-primary">Confirm</button>
-            <button type="button" id="close-popup"
-                    class="btn btn-outline-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Check subscription</button>
+            <p id="subscription-status" class="form-status mt-3 mb-0" role="status" aria-live="polite"></p>
         </form>
     </dialog>
 
@@ -204,8 +227,8 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/site.js"></script>
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <script src="js/site.js" defer></script>
 </body>
 
 </html>

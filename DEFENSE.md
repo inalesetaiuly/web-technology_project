@@ -10,7 +10,7 @@
 
 **Flexbox:** `d-flex flex-column min-vh-100` on the body and `mt-auto` on the footer keep short pages full-height. Card bodies use a column layout and `mt-auto` to align their buttons even when descriptions have different lengths.
 
-**JavaScript:** `js/site.js` listens for submit and reset on the contact form. Native `required` and `type="email"` validation runs first. `preventDefault()` stops the browser from posting to GitHub Pages, which cannot handle a form server. The `role="status"` area announces the result. The demonstration does not send a message.
+**JavaScript (Assignment 4):** `js/site.js` validates required fields, email format, password length and confirmation using custom inline messages. The forms use `novalidate` so JavaScript controls feedback; `preventDefault()` stops a real submission. The file also handles animated FAQs, the subscription dialog, background colors and a live clock. Every page links it with `defer`, and existence checks skip absent components. See `DEFENSE_RU.md` for the complete Assignment 4 demonstration and explanations.
 
 ## Practice small live modifications
 

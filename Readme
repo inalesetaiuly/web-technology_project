@@ -35,6 +35,9 @@ The website helps students find useful information about:
 - Bootstrap buttons and cards
 - Image carousel
 - Responsive contact form
+- JavaScript form validation, including practice password length and confirmation
+- Animated FAQs and a subscription popup
+- Background color switcher and live date/time
 - Accessible semantic HTML
 
 ## Team Members
@@ -44,4 +47,6 @@ The website helps students find useful information about:
 
 ## Live Website
 
-Add your GitHub Pages link here.
+https://inalesetaiuly.github.io/web-technology_project/
+
+See README.md for current setup and deployment status, and DEFENSE_RU.md for Assignment 4 explanations.

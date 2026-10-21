@@ -13,7 +13,7 @@ This retains two HTML pages for each team member. Both members should understand
 
 ## Technologies
 
-Semantic HTML5, custom CSS, Bootstrap 5.3.8 and a small vanilla JavaScript form handler. Bootstrap CSS and its bundle load from jsDelivr, so an internet connection is required for Bootstrap styling and interactive components.
+Semantic HTML5, custom CSS, Bootstrap 5.3.8 and vanilla JavaScript. Bootstrap CSS, its JavaScript bundle and its MIT license are included in `vendor/bootstrap/`. All runtime assets are local; no package installation or internet connection is required to run the downloaded project.
 
 ## Run locally
 
@@ -26,16 +26,33 @@ Open `index.html` in a browser, or run `python3 -m http.server 8000` from the pr
 3. Choose **Deploy from a branch**, then the branch containing these files and **/(root)**. Save.
 4. Wait for deployment to finish and copy the URL shown by GitHub into your submission.
 
-Expected project URL after successful deployment: https://inalesetaiuly.github.io/web-technology_project/
+Project URL: https://inalesetaiuly.github.io/web-technology_project/
 
-All project links use relative paths, including case-sensitive image filenames, so they work under the repository subdirectory. The expected URL is not confirmation of a deployed site.
+GitHub Pages hosts the project at this URL. Updates are published by pushing the project files to the shared repository and allowing the Pages deployment to finish. All local links use relative paths, including case-sensitive image filenames, so they work under the repository subdirectory.
+
+## Assignment 4: JavaScript components
+
+| Task | Page / UI | Main JavaScript |
+| --- | --- | --- |
+| 1. Form validation | Contact → Get in Touch | `fieldError()`, `showFieldError()`, `setupValidation()` |
+| 2. FAQ accordion | Resources → Frequently Asked Questions | `.faq-toggle` click listeners and `Element.animate()` |
+| 3. Subscription popup | Contact → Campus Newsletter | `showModal()`, `close()`, backdrop detection |
+| 4. Background color | Home → A moment for your day | color array, index and `body.style.backgroundColor` |
+| 5. Current date/time | Home → A moment for your day | `new Date()`, `Intl.DateTimeFormat`, `setInterval()` |
+
+Every HTML page links `vendor/bootstrap/bootstrap.bundle.min.js` and `js/site.js` using `defer`. Guards skip components that are absent on a particular page. Both team members are named in every footer. Group: **SE-2508**.
+
+The work continues the shared commit `43bb43a`: the original FAQ, subscription popup and contact validation were retained and extended. This revision adds inline validation (including password length and confirmation), animation, backdrop closing, the background switcher, the clock, and consistent integration. Both members should review the final changes and be able to demonstrate at least one JavaScript component.
 
 ## Behavior and limitations
 
 - Navigation collapses below Bootstrap's `lg` breakpoint; the toggler and carousel use Bootstrap's bundle.
 - Resource categories jump to relevant content on the same page.
 - The carousel is manually controlled and does not auto-advance.
-- Contact fields use native browser validation. A valid submission displays an accessible status message without navigating or transmitting data. Reset clears both fields and status.
+- Contact fields use custom JavaScript messages with `required`, email format checks, a minimum practice password length of 8, and exact confirmation matching. Whitespace-only values are rejected. `novalidate` allows our inline messages instead of native browser bubbles. A valid submission displays an accessible status message without navigating or transmitting data. Reset clears both fields and status. Practice passwords are cleared after successful validation; do not enter real credentials.
+- FAQ answers are hidden initially and animate open/closed over 240ms. Keyboard activation and reduced-motion preferences are supported.
+- The subscription dialog opens from Subscribe, checks name/email, and closes using the close button, Escape or the backdrop. Focus returns to Subscribe.
+- The background button cycles through four predefined colors; the clock updates every second in the visitor's device timezone.
 - The campus directory, phone numbers and emails are sample project content, not verified university contacts. Replace them with confirmed details before using the site as a real service.
 - Photos are existing project assets. The team should confirm their permission to publish these images.
 
@@ -43,4 +60,4 @@ All project links use relative paths, including case-sensitive image filenames, 
 
 Each page has a skip link, one main heading, semantic sections, a labeled navigation, current-page indication and descriptive image alternatives. Forms have visible labels. Tables scroll inside their containers on narrow screens. Keyboard focus remains visible, and motion preferences are respected.
 
-See `DEFENSE.md` for explanations and live-edit practice.
+See `DEFENSE_RU.md` for Assignment 4 explanations, a demonstration script and live-edit practice. `DEFENSE.md` retains the earlier HTML/Bootstrap notes.

@@ -340,3 +340,21 @@ caption { color: #4b5e65; }
 }
 
 .campus-carousel .carousel-item img { aspect-ratio: auto; }
+
+/* Assignment 4: custom JavaScript components. */
+body { transition: background-color 300ms ease; }
+.tool-label { color: #235b67; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.live-clock { display: block; color: var(--navy-900); font-size: clamp(1.1rem, 2.5vw, 1.65rem); font-weight: 650; font-variant-numeric: tabular-nums; }
+.field-error { color: #a01627; font-size: .9rem; margin: .35rem 0 0; }
+.field-error[hidden], .faq-answer[hidden] { display: none; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: 0; }
+.faq-toggle { display: flex; justify-content: space-between; align-items: center; gap: 1rem; width: 100%; border: 0; background: transparent; padding: 1.25rem .25rem; color: var(--navy-900); text-align: left; font: inherit; }
+.faq-toggle:hover { color: #235b67; }
+.faq-symbol { font-size: 1.5rem; font-weight: 400; transition: transform 240ms ease; }
+.faq-toggle[aria-expanded="true"] .faq-symbol { transform: rotate(45deg); }
+.faq-answer { overflow: hidden; }
+.faq-answer p { margin: 0; padding: 0 .25rem 1.25rem; }
+.subscription-dialog { width: min(32rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); overflow-y: auto; border: 1px solid var(--border); border-radius: 1rem; padding: clamp(1.25rem, 4vw, 2rem); color: var(--text); box-shadow: 0 24px 80px rgba(7,26,51,.25); }
+.subscription-dialog::backdrop { background: rgba(7,26,51,.6); }
+.dialog-close { flex: 0 0 auto; width: 2rem; height: 2rem; padding: 0; border: 1px solid var(--border); border-radius: 50%; background: white; color: var(--navy-900); font-size: 1.5rem; line-height: 1; }

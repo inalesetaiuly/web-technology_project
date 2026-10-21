@@ -7,7 +7,7 @@
     <meta name="description" content="Campus Life: a student guide to study spaces, campus resources and student community.">
     <title>Campus Life | Resources</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -142,30 +142,41 @@
                 </section>
             </div>
         </div>
+        <section id="campus-faq" class="section-panel p-4 mt-4" aria-labelledby="faq-title">
+            <p class="tool-label">Quick answers</p>
+            <h2 id="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3 class="h5 mb-0">
+                    <button type="button" id="faq-library-toggle" class="faq-toggle" aria-expanded="false" aria-controls="faq-library">
+                        Where is the library?<span class="faq-symbol" aria-hidden="true">+</span>
+                    </button>
+                </h3>
+                <div id="faq-library" class="faq-answer" role="region" aria-labelledby="faq-library-toggle" hidden>
+                    <p>The library is in the Main Building. This is sample directory information; confirm the location with your university.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="h5 mb-0">
+                    <button type="button" id="faq-support-toggle" class="faq-toggle" aria-expanded="false" aria-controls="faq-support">
+                        How can I contact IT support?<span class="faq-symbol" aria-hidden="true">+</span>
+                    </button>
+                </h3>
+                <div id="faq-support" class="faq-answer" role="region" aria-labelledby="faq-support-toggle" hidden>
+                    <p>Open the <a href="contact.html">Contact page</a> and select IT Support. The form demonstrates validation; use official university channels for real requests.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="h5 mb-0">
+                    <button type="button" id="faq-study-toggle" class="faq-toggle" aria-expanded="false" aria-controls="faq-study">
+                        How can I plan a productive study session?<span class="faq-symbol" aria-hidden="true">+</span>
+                    </button>
+                </h3>
+                <div id="faq-study" class="faq-answer" role="region" aria-labelledby="faq-study-toggle" hidden>
+                    <p>Set one clear goal, choose a quiet study space and take regular breaks. See the <a href="#study-tips">study tips</a> for more ideas.</p>
+                </div>
+            </div>
+        </section>
     </main>
-    <section class="section-panel p-4 mt-4">
-        <h2>Frequently Asked Questions</h2>
-
-        <div class="mb-3">
-            <button type="button" class="btn btn-outline-primary faq-toggle"
-                    aria-expanded="false" aria-controls="faq-library">
-                Where is the library?
-            </button>
-            <p id="faq-library" class="mt-2" hidden>
-                The library is in the Main Building.
-            </p>
-        </div>
-
-        <div class="mb-3">
-            <button type="button" class="btn btn-outline-primary faq-toggle"
-                    aria-expanded="false" aria-controls="faq-support">
-                How can I contact IT support?
-            </button>
-            <p id="faq-support" class="mt-2" hidden>
-                Open the Contact page and select IT Support.
-            </p>
-        </div>
-    </section>÷
 
     <footer class="site-footer mt-auto py-3">
         <div class="container text-center">
@@ -176,8 +187,8 @@
         </div>
     </footer>
 
-    <script src="js/site.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <script src="js/site.js" defer></script>
 </body>
 
 </html>
