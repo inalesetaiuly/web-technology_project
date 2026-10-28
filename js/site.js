@@ -1,19 +1,51 @@
 'use strict';
 
-// Task 1: validate both demo forms with messages beside each field.
-function fieldError(field) {
-    const value = field.type === 'password' ? field.value : field.value.trim();
-    if (field.required && value.trim() === '') {
-        return field.tagName === 'SELECT' ? 'Choose a topic / department.' : 'This field is required.';
+// Task 1: keep validation rules in JavaScript, independent of HTML attributes.
+const contactRules = {
+    fullname: { label: 'Full Name' },
+    email: { label: 'Email', type: 'email' },
+    subject: { label: 'Subject' },
+    category: {
+        label: 'Topic / Department', tagName: 'SELECT',
+        choices: ['general', 'it_support', 'library', 'academic', 'feedback']
+    },
+    password: { label: 'Practice password', type: 'password', minLength: 8 },
+    'confirm-password': { label: 'Confirm practice password', type: 'password', match: 'password' },
+    message: { label: 'Message', tagName: 'TEXTAREA' }
+};
+const subscriptionRules = {
+    'subscriber-name': { label: 'Name' },
+    'subscriber-email': { label: 'Email', type: 'email' }
+};
+
+function validationField(form, id, rule) {
+    // Re-read the live form: a deleted, duplicated or disabled field is invalid.
+    const matches = form.querySelectorAll(`[id="${id}"]`);
+    if (matches.length !== 1) return null;
+    const field = matches[0];
+    if (field.form !== form || field.matches(':disabled') ||
+        field.tagName !== (rule.tagName || 'INPUT')) return null;
+    return field;
+}
+
+function fieldError(field, rule, form, rules) {
+    const value = rule.type === 'password' ? field.value : field.value.trim();
+    if (value.trim() === '') {
+        return rule.tagName === 'SELECT' ? 'Choose a topic / department.' : 'This field is required.';
     }
-    if (field.type === 'email' && (field.validity.typeMismatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))) {
+    if (rule.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
         return 'Enter a valid email, for example student@example.com.';
     }
-    if (field.minLength > 0 && value.length < field.minLength) {
-        return `Use at least ${field.minLength} characters.`;
+    if (rule.minLength && value.length < rule.minLength) {
+        return `Use at least ${rule.minLength} characters.`;
     }
-    if (field.dataset.match && value !== document.getElementById(field.dataset.match).value) {
-        return 'Passwords do not match.';
+    if (rule.choices && !rule.choices.includes(value)) {
+        return 'Choose a valid topic / department.';
+    }
+    if (rule.match) {
+        const original = validationField(form, rule.match, rules[rule.match]);
+        if (!original) return 'The password field is missing or unavailable. Reload the page.';
+        if (value !== original.value) return 'Passwords do not match.';
     }
     return '';
 }
@@ -29,9 +61,8 @@ function showFieldError(field, message) {
     }
 }
 
-function setupValidation(form, status, successMessage) {
+function setupValidation(form, status, rules, successMessage) {
     if (!form || !status) return;
-    const fields = Array.from(form.querySelectorAll('[required]'));
     let submitted = false;
     function clearStatus() {
         status.textContent = '';
@@ -43,46 +74,66 @@ function setupValidation(form, status, successMessage) {
         submitted = true;
         clearStatus();
         let firstInvalid = null;
-        fields.forEach((field) => {
-            if (field.type !== 'password') field.value = field.value.trim();
-            const message = fieldError(field);
+        const unavailable = [];
+        Object.entries(rules).forEach(([id, rule]) => {
+            const field = validationField(form, id, rule);
+            if (!field) {
+                unavailable.push(rule.label);
+                return;
+            }
+            if (rule.type !== 'password') field.value = field.value.trim();
+            const message = fieldError(field, rule, form, rules);
             showFieldError(field, message);
             if (message && !firstInvalid) firstInvalid = field;
         });
-        if (firstInvalid) {
-            status.textContent = 'Please correct the highlighted fields and try again.';
+        if (unavailable.length || firstInvalid) {
+            status.textContent = unavailable.length
+                ? `Required fields are missing or unavailable: ${unavailable.join(', ')}. Reload the page and try again.`
+                : 'Please correct the highlighted fields and try again.';
             status.classList.add('alert', 'alert-danger');
-            firstInvalid.focus();
+            if (firstInvalid) firstInvalid.focus();
             return;
         }
         status.textContent = successMessage;
         status.classList.add('alert', 'alert-success');
         // Passwords are compared only in memory and never stored or logged.
-        form.querySelectorAll('input[type="password"]').forEach((field) => { field.value = ''; });
+        Object.entries(rules).forEach(([id, rule]) => {
+            if (rule.type === 'password') validationField(form, id, rule).value = '';
+        });
         submitted = false;
     });
-    fields.forEach((field) => {
-        const recheck = () => {
-            clearStatus();
-            if (submitted || field.hasAttribute('aria-invalid')) showFieldError(field, fieldError(field));
-            if (field.id === 'password' && submitted) {
-                const confirmation = form.querySelector('[data-match="password"]');
-                if (confirmation) showFieldError(confirmation, fieldError(confirmation));
+    // Delegation also handles a field that is replaced after the page has loaded.
+    const recheck = (event) => {
+        const field = event.target;
+        const rule = rules[field.id];
+        if (!Object.hasOwn(rules, field.id) || validationField(form, field.id, rule) !== field) return;
+        clearStatus();
+        if (submitted || field.hasAttribute('aria-invalid')) {
+            showFieldError(field, fieldError(field, rule, form, rules));
+        }
+        Object.entries(rules).forEach(([id, dependentRule]) => {
+            if (dependentRule.match !== field.id) return;
+            const dependent = validationField(form, id, dependentRule);
+            if (dependent && (submitted || dependent.hasAttribute('aria-invalid'))) {
+                showFieldError(dependent, fieldError(dependent, dependentRule, form, rules));
             }
-        };
-        field.addEventListener('input', recheck);
-        field.addEventListener('change', recheck);
-    });
+        });
+    };
+    form.addEventListener('input', recheck);
+    form.addEventListener('change', recheck);
     form.addEventListener('reset', () => {
         submitted = false;
         clearStatus();
-        fields.forEach((field) => showFieldError(field, ''));
+        Object.entries(rules).forEach(([id, rule]) => {
+            const field = validationField(form, id, rule);
+            if (field) showFieldError(field, '');
+        });
     });
 }
 
-setupValidation(document.querySelector('#contact-form'), document.querySelector('#form-status'),
+setupValidation(document.querySelector('#contact-form'), document.querySelector('#form-status'), contactRules,
     'All fields are valid and the passwords match. Demo complete: no account was created and no message was sent or stored.');
-setupValidation(document.querySelector('#subscription-form'), document.querySelector('#subscription-status'),
+setupValidation(document.querySelector('#subscription-form'), document.querySelector('#subscription-status'), subscriptionRules,
     'Subscription details are valid. Demo complete: no subscription was sent or stored.');
 
 // Task 2: extend the existing FAQ toggle with a smooth open/close transition.
