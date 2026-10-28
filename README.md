@@ -61,3 +61,25 @@ The work continues the shared commit `43bb43a`: the original FAQ, subscription p
 Each page has a skip link, one main heading, semantic sections, a labeled navigation, current-page indication and descriptive image alternatives. Forms have visible labels. Tables scroll inside their containers on narrow screens. Keyboard focus remains visible, and motion preferences are respected.
 
 See `DEFENSE_RU.md` for Assignment 4 explanations, a demonstration script and live-edit practice. `DEFENSE.md` retains the earlier HTML/Bootstrap notes.
+
+## Assignment 5: advanced JavaScript and DOM
+
+| Requirement | Feature / implementation |
+| --- | --- |
+| DOM selection, content, attributes and styling | Personal greeting, dynamic resource cards, theme / ARIA updates |
+| Dynamic styling | Day/night theme on all pages; saved preference in localStorage |
+| One manipulation option | Personalized greeting on Home (safe textContent; submit/Enter) |
+| Click and keyboard listeners | Theme, filters, sound, greeting; arrow/Home/End navigation |
+| Callback option | Three-step Contact form; createStepController(total, onStepChange) |
+| Switch | Resource categories and arrow-key navigation |
+| Objects and methods | catalog.items, filterByCategory(), render() |
+| Arrays, loops, higher-order functions | Array of resource objects; for...of; filter()/forEach() |
+| Sound | User-triggered Web Audio signal with overlap guard and cleanup |
+| Event-triggered animations | Greeting, cards and form steps; reduced motion supported |
+| Separation | HTML markup, css/style.css, js/site.js and js/assignment5.js |
+
+Contact is a demo, not a real account or messaging endpoint. Next validates the current step; final submission validates all required fields using JavaScript rules. Back retains input and Reset returns to the first step. The old light-background control applies only in day mode. Only the theme is stored; no names, messages or passwords are persisted.
+
+New code is in `js/assignment5.js`, loaded after the shared `js/site.js`. Run the browser regression suite with Playwright installed: `node tests/assignment5.cjs`. Optional `PLAYWRIGHT_MODULE` and `CHROME_EXECUTABLE` select existing local installations; no npm dependency is required to run the website itself. The suite starts a local server, checks the UI at 390/768/1440px, validates failure cases and captures actual browser evidence in `output/assignment5/evidence/`. Set `TEST_BASE_URL` to test a deployed copy after publication.
+
+See `DEFENSE_ASSIGNMENT5_RU.md` for a demonstration sequence and detailed explanations. Submission artifacts are in `output/pdf/` and `output/assignment5/`. Human defense and LMS submission must be completed by each team member.

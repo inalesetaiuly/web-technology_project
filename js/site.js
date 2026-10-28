@@ -91,7 +91,10 @@ function setupValidation(form, status, rules, successMessage) {
                 ? `Required fields are missing or unavailable: ${unavailable.join(', ')}. Reload the page and try again.`
                 : 'Please correct the highlighted fields and try again.';
             status.classList.add('alert', 'alert-danger');
-            if (firstInvalid) firstInvalid.focus();
+            if (firstInvalid) {
+                form.dispatchEvent(new CustomEvent('validation-error', { detail: { field: firstInvalid } }));
+                firstInvalid.focus();
+            }
             return;
         }
         status.textContent = successMessage;
@@ -206,9 +209,13 @@ if (backgroundButton) {
     ];
     let backgroundIndex = 0;
     backgroundButton.addEventListener('click', () => {
+        if (document.documentElement.dataset.bsTheme === 'dark') {
+            document.querySelector('#background-status').textContent = 'Switch to Day theme to choose a light background.';
+            return;
+        }
         backgroundIndex = (backgroundIndex + 1) % backgrounds.length;
         const background = backgrounds[backgroundIndex];
-        document.body.style.backgroundColor = background.color;
+        document.body.style.setProperty('--day-background', background.color);
         document.querySelector('#background-status').textContent = `Background: ${background.name}`;
     });
 }

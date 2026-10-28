@@ -358,3 +358,56 @@ body { transition: background-color 300ms ease; }
 .subscription-dialog { width: min(32rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); overflow-y: auto; border: 1px solid var(--border); border-radius: 1rem; padding: clamp(1.25rem, 4vw, 2rem); color: var(--text); box-shadow: 0 24px 80px rgba(7,26,51,.25); }
 .subscription-dialog::backdrop { background: rgba(7,26,51,.6); }
 .dialog-close { flex: 0 0 auto; width: 2rem; height: 2rem; padding: 0; border: 1px solid var(--border); border-radius: 50%; background: white; color: var(--navy-900); font-size: 1.5rem; line-height: 1; }
+
+/* Assignment 5: shared day/night theme and accessible interactive components. */
+[hidden] { display: none !important; }
+html { color-scheme: light; }
+body { background-color: var(--day-background, var(--page-background)); }
+.greeting-input { flex: 1 1 15rem; max-width: 30rem; }
+.wizard-progress { width: 100%; height: .75rem; accent-color: #235b67; }
+#wizard-step-label:focus { outline-offset: .3rem; }
+#resource-filters [aria-pressed="true"] { background-color: #0b354b; color: #fff; }
+.resource-card, .media-card, .section-panel, .resource-sidebar, .team-member,
+.subscription-dialog { transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease; }
+
+html[data-bs-theme="dark"] {
+    color-scheme: dark;
+    --page-background: #101923;
+    --surface: #192633;
+    --text: #e5edf4;
+    --border: #445669;
+    --navy-900: #d5eaf8;
+    --navy-700: #8ed2de;
+    --bs-body-color: #e5edf4;
+    --bs-body-bg: #192633;
+    --bs-secondary-color: #b7c8d4;
+    --bs-border-color: #445669;
+}
+html[data-bs-theme="dark"] body { background-color: var(--page-background); }
+html[data-bs-theme="dark"] .site-navbar { background: #071a33; }
+html[data-bs-theme="dark"] a { color: #9bdce7; }
+html[data-bs-theme="dark"] .site-navbar a,
+html[data-bs-theme="dark"] .site-footer a { color: #fff; }
+html[data-bs-theme="dark"] .hero-section a.btn-light { color: #14213d; }
+html[data-bs-theme="dark"] .hero-section a.btn-outline-light { color: #fff; }
+html[data-bs-theme="dark"] .hero-section a.btn-outline-light:hover { color: #14213d; }
+html[data-bs-theme="dark"] .team-member { background: #213140; }
+html[data-bs-theme="dark"] .page-heading .eyebrow,
+html[data-bs-theme="dark"] .tool-label { color: #8ed2de; }
+html[data-bs-theme="dark"] .page-heading .lead,
+html[data-bs-theme="dark"] caption { color: #b7c8d4; }
+html[data-bs-theme="dark"] .table { --bs-table-bg: #192633; --bs-table-color: #e5edf4; --bs-table-striped-bg: #223342; --bs-table-striped-color: #e5edf4; --bs-table-hover-bg: #2b4052; --bs-table-hover-color: #fff; }
+html[data-bs-theme="dark"] .resource-sidebar .list-group-item { color: var(--text); }
+html[data-bs-theme="dark"] .subscription-dialog { background: var(--surface); }
+html[data-bs-theme="dark"] .dialog-close,
+html[data-bs-theme="dark"] .skip-link { background: #213140; color: var(--text); }
+html[data-bs-theme="dark"] .field-error { color: #ffb5bd; }
+html[data-bs-theme="dark"] .btn-outline-primary { --bs-btn-color: #9bdce7; --bs-btn-border-color: #9bdce7; --bs-btn-hover-color: #101923; --bs-btn-hover-bg: #9bdce7; }
+html[data-bs-theme="dark"] .media-card-button,
+html[data-bs-theme="dark"] a.btn-primary { background-color: #0b354b; color: #fff; }
+html[data-bs-theme="dark"] .media-card-button:hover { background-color: #174a5d; }
+html[data-bs-theme="dark"] :focus-visible { outline-color: #ffd070; }
+@media (prefers-reduced-motion: reduce) {
+    body, .resource-card, .media-card, .section-panel, .resource-sidebar,
+    .team-member, .subscription-dialog { transition: none; }
+}

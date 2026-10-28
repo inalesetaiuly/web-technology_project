@@ -33,6 +33,7 @@
                         <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     </ul>
+                    <button type="button" class="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
                 </div>
             </div>
         </nav>
@@ -59,8 +60,24 @@
                     <p class="small">Choose a calm background for your study break.</p>
                     <button id="change-background" class="btn btn-outline-primary" type="button">Change background</button>
                     <p id="background-status" class="small mt-2 mb-0" role="status">Background: Warm paper</p>
+                    <button id="play-notification" class="btn btn-outline-primary mt-3" type="button">Play notification sound</button>
+                    <p id="sound-status" class="small mt-2 mb-0" role="status">A short campus reminder, played on request.</p>
                 </div>
             </div>
+        </section>
+
+        <section class="section-panel p-4 mb-4" aria-labelledby="greeting-title">
+            <p class="tool-label">Make it personal</p>
+            <h2 id="greeting-title">Your campus welcome</h2>
+            <form id="greeting-form" novalidate>
+                <label class="form-label" for="greeting-name">Your name</label>
+                <div class="d-flex flex-wrap gap-2">
+                    <input id="greeting-name" class="form-control greeting-input" type="text" autocomplete="given-name" maxlength="60" aria-describedby="greeting-error" required>
+                    <button type="submit" class="btn btn-primary">Say hello</button>
+                </div>
+                <p id="greeting-error" class="field-error" hidden></p>
+            </form>
+            <p id="personal-greeting" class="mt-3 mb-0" role="status">Welcome to Campus Life!</p>
         </section>
 
         <section class="section-panel p-4 mb-5" aria-labelledby="welcome-title">
@@ -144,6 +161,7 @@
 
     <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/assignment5.js" defer></script>
 </body>
 
 </html>

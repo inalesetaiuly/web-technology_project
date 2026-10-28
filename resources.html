@@ -32,6 +32,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="resources.html">Resources</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     </ul>
+                    <button type="button" class="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
                 </div>
             </div>
         </nav>
@@ -72,7 +73,13 @@
 
                 <section class="mb-4" aria-labelledby="featured-resources-title">
                     <h2 id="featured-resources-title" class="mb-4">Featured Resources</h2>
-                    <div class="row g-4">
+                    <div id="resource-filters" class="d-flex flex-wrap gap-2 mb-3" role="group" aria-label="Filter campus resources" hidden>
+                        <button class="btn btn-outline-primary" type="button" data-category="all" aria-pressed="true">All</button>
+                        <button class="btn btn-outline-primary" type="button" data-category="study" aria-pressed="false">Study</button>
+                        <button class="btn btn-outline-primary" type="button" data-category="activities" aria-pressed="false">Activities</button>
+                    </div>
+                    <p id="resource-count" class="small" role="status">3 campus resources</p>
+                    <div id="resource-cards" class="row g-4">
                         <div class="col-12 col-md-6 col-lg-4">
                             <article class="card resource-card h-100">
                                 <img loading="lazy" decoding="async" src="images/library.png" class="card-img-top" alt="Shelves inside the university library">
@@ -190,6 +197,7 @@
 
     <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/assignment5.js" defer></script>
 </body>
 
 </html>
