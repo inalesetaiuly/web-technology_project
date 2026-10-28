@@ -10,10 +10,17 @@
 
     <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="reading-progress" role="progressbar" aria-label="Page scroll progress"
+        aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+        <div class="reading-progress-fill"></div>
+    </div>
+
     <header>
         <nav aria-label="Main navigation" class="navbar navbar-expand-lg site-navbar" data-bs-theme="dark">
             <div class="container">
@@ -32,6 +39,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="resources.html">Resources</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     </ul>
+                    <button type="button" class="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
                 </div>
             </div>
         </nav>
@@ -72,7 +80,22 @@
 
                 <section class="mb-4" aria-labelledby="featured-resources-title">
                     <h2 id="featured-resources-title" class="mb-4">Featured Resources</h2>
-                    <div class="row g-4">
+                    <div id="resource-search-box" class="mb-3" hidden>
+                        <label for="resource-search" class="form-label">Search campus resources</label>
+                        <input id="resource-search" class="form-control" type="search" maxlength="100"
+                            autocomplete="off" placeholder="Try library or study"
+                            aria-controls="resource-cards resource-suggestions">
+                        <div id="resource-suggestions" class="list-group mt-1" role="group"
+                            aria-label="Search suggestions" hidden></div>
+                    </div>
+                    <div id="resource-filters" class="d-flex flex-wrap gap-2 mb-3" role="group" aria-label="Filter campus resources" hidden>
+                        <button class="btn btn-outline-primary" type="button" data-category="all" aria-pressed="true">All</button>
+                        <button class="btn btn-outline-primary" type="button" data-category="study" aria-pressed="false">Study</button>
+                        <button class="btn btn-outline-primary" type="button" data-category="activities" aria-pressed="false">Activities</button>
+                    </div>
+                    <p id="resource-count" class="small" role="status">3 campus resources</p>
+                    <p id="resource-no-results" class="section-panel p-3" hidden>No resources match. Try a different term or category.</p>
+                    <div id="resource-cards" class="row g-4">
                         <div class="col-12 col-md-6 col-lg-4">
                             <article class="card resource-card h-100">
                                 <img loading="lazy" decoding="async" src="images/library.png" class="card-img-top" alt="Shelves inside the university library">
@@ -190,6 +213,7 @@
 
     <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/assignment5.js" defer></script>
 </body>
 
 </html>

@@ -11,10 +11,17 @@
 
     <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="reading-progress" role="progressbar" aria-label="Page scroll progress"
+        aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+        <div class="reading-progress-fill"></div>
+    </div>
+
     <header>
         <nav aria-label="Main navigation" class="navbar navbar-expand-lg site-navbar" data-bs-theme="dark">
             <div class="container">
@@ -33,6 +40,7 @@
                         <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     </ul>
+                    <button type="button" class="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
                 </div>
             </div>
         </nav>
@@ -127,39 +135,48 @@
 
                 <div class="carousel-inner rounded">
                     <div class="carousel-item active">
-                        <img loading="lazy" decoding="async" src="images/gallery1.png" class="d-block w-100" alt="Students studying together">
+                        <img decoding="async" data-lazy-src="images/gallery1.png" class="d-block w-100" alt="Students studying together">
+                        <noscript><img src="images/gallery1.png" class="d-block w-100" alt="Students studying together"></noscript>
                         <div class="carousel-caption d-block"><h3 class="h5 mb-0">Group Study</h3></div>
                     </div>
                     <div class="carousel-item">
-                        <img loading="lazy" decoding="async" src="images/gallery2.png" class="d-block w-100" alt="University library">
+                        <img decoding="async" data-lazy-src="images/gallery2.png" class="d-block w-100" alt="University library">
+                        <noscript><img src="images/gallery2.png" class="d-block w-100" alt="University library"></noscript>
                         <div class="carousel-caption d-block"><h3 class="h5 mb-0">University Library</h3></div>
                     </div>
                     <div class="carousel-item">
-                        <img loading="lazy" decoding="async" src="images/gallery3.png" class="d-block w-100" alt="Student club event">
+                        <img decoding="async" data-lazy-src="images/gallery3.png" class="d-block w-100" alt="Student club event">
+                        <noscript><img src="images/gallery3.png" class="d-block w-100" alt="Student club event"></noscript>
                         <div class="carousel-caption d-block"><h3 class="h5 mb-0">Student Activities</h3></div>
                     </div>
                     <div class="carousel-item">
-                        <img loading="lazy" decoding="async" src="images/gallery4.png" class="d-block w-100" alt="Students in computer lab">
+                        <img decoding="async" data-lazy-src="images/gallery4.png" class="d-block w-100" alt="Students in computer lab">
+                        <noscript><img src="images/gallery4.png" class="d-block w-100" alt="Students in computer lab"></noscript>
                         <div class="carousel-caption d-block"><h3 class="h5 mb-0">Computer Lab</h3></div>
                     </div>
                     <div class="carousel-item">
-                        <img loading="lazy" decoding="async" src="images/gallery5.png" class="d-block w-100" alt="University campus">
+                        <img decoding="async" data-lazy-src="images/gallery5.png" class="d-block w-100" alt="University campus">
+                        <noscript><img src="images/gallery5.png" class="d-block w-100" alt="University campus"></noscript>
                         <div class="carousel-caption d-block"><h3 class="h5 mb-0">Campus Life</h3></div>
                     </div>
                     <div class="carousel-item">
-                        <img loading="lazy" decoding="async" src="images/gallery6.png" class="d-block w-100" alt="Students working on a project">
+                        <img decoding="async" data-lazy-src="images/gallery6.png" class="d-block w-100" alt="Students working on a project">
+                        <noscript><img src="images/gallery6.png" class="d-block w-100" alt="Students working on a project"></noscript>
                         <div class="carousel-caption d-block"><h3 class="h5 mb-0">Team Projects</h3></div>
                     </div>
                     <div class="carousel-item">
-                        <img loading="lazy" decoding="async" src="images/gallery7.png" class="d-block w-100" alt="Students at campus event">
+                        <img decoding="async" data-lazy-src="images/gallery7.png" class="d-block w-100" alt="Students at campus event">
+                        <noscript><img src="images/gallery7.png" class="d-block w-100" alt="Students at campus event"></noscript>
                         <div class="carousel-caption d-block"><h3 class="h5 mb-0">Campus Events</h3></div>
                     </div>
                     <div class="carousel-item">
-                        <img loading="lazy" decoding="async" src="images/gallery8.png" class="d-block w-100" alt="Student study space">
+                        <img decoding="async" data-lazy-src="images/gallery8.png" class="d-block w-100" alt="Student study space">
+                        <noscript><img src="images/gallery8.png" class="d-block w-100" alt="Student study space"></noscript>
                         <div class="carousel-caption d-block"><h3 class="h5 mb-0">Study Spaces</h3></div>
                     </div>
                     <div class="carousel-item">
-                        <img loading="lazy" decoding="async" src="images/gallery9.png" class="d-block w-100" alt="Students relaxing on campus">
+                        <img decoding="async" data-lazy-src="images/gallery9.png" class="d-block w-100" alt="Students relaxing on campus">
+                        <noscript><img src="images/gallery9.png" class="d-block w-100" alt="Students relaxing on campus"></noscript>
                         <div class="carousel-caption d-block"><h3 class="h5 mb-0">Student Community</h3></div>
                     </div>
                 </div>
@@ -187,6 +204,7 @@
 
     <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/assignment5.js" defer></script>
 </body>
 
 </html>

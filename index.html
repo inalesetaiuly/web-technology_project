@@ -11,10 +11,17 @@
 
     <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="reading-progress" role="progressbar" aria-label="Page scroll progress"
+        aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+        <div class="reading-progress-fill"></div>
+    </div>
+
     <header>
         <nav aria-label="Main navigation" class="navbar navbar-expand-lg site-navbar" data-bs-theme="dark">
             <div class="container">
@@ -33,6 +40,7 @@
                         <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     </ul>
+                    <button type="button" class="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
                 </div>
             </div>
         </nav>
@@ -43,6 +51,15 @@
             <p class="eyebrow mb-2">Student guide</p>
             <h1 id="home-title" class="page-title hero-title mb-3">Make campus<br>feel like home.</h1>
             <p class="lead mx-auto hero-copy">Your student guide to studying smarter, finding your people and making the most of campus.</p><div class="d-flex flex-wrap gap-3 justify-content-center mt-4"><a href="resources.html" class="btn btn-light btn-lg">Explore resources</a><a href="about.html" class="btn btn-outline-light btn-lg">Meet the community</a></div>
+        </section>
+
+        <section class="section-panel p-4 mb-4" aria-labelledby="stats-title">
+            <h2 id="stats-title" class="h4 mb-3">Campus Life at a glance</h2>
+            <dl class="campus-stats mb-0">
+                <div><dt>Featured resources</dt><dd><span data-count-to="3">3</span></dd></div>
+                <div><dt>Gallery photos</dt><dd><span data-count-to="9">9</span></dd></div>
+                <div><dt>Site pages</dt><dd><span data-count-to="4">4</span></dd></div>
+            </dl>
         </section>
 
         <section id="campus-tools" class="section-panel p-4 mb-4" aria-labelledby="tools-title">
@@ -59,8 +76,24 @@
                     <p class="small">Choose a calm background for your study break.</p>
                     <button id="change-background" class="btn btn-outline-primary" type="button">Change background</button>
                     <p id="background-status" class="small mt-2 mb-0" role="status">Background: Warm paper</p>
+                    <button id="play-notification" class="btn btn-outline-primary mt-3" type="button">Play notification sound</button>
+                    <p id="sound-status" class="small mt-2 mb-0" role="status">A short campus reminder, played on request.</p>
                 </div>
             </div>
+        </section>
+
+        <section class="section-panel p-4 mb-4" aria-labelledby="greeting-title">
+            <p class="tool-label">Make it personal</p>
+            <h2 id="greeting-title">Your campus welcome</h2>
+            <form id="greeting-form" novalidate>
+                <label class="form-label" for="greeting-name">Your name</label>
+                <div class="d-flex flex-wrap gap-2">
+                    <input id="greeting-name" class="form-control greeting-input" type="text" autocomplete="given-name" maxlength="60" aria-describedby="greeting-error" required>
+                    <button type="submit" class="btn btn-primary">Say hello</button>
+                </div>
+                <p id="greeting-error" class="field-error" hidden></p>
+            </form>
+            <p id="personal-greeting" class="mt-3 mb-0" role="status">Welcome to Campus Life!</p>
         </section>
 
         <section class="section-panel p-4 mb-5" aria-labelledby="welcome-title">
@@ -144,6 +177,7 @@
 
     <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/assignment5.js" defer></script>
 </body>
 
 </html>

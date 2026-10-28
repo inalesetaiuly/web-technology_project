@@ -13,11 +13,11 @@ This retains two HTML pages for each team member. Both members should understand
 
 ## Technologies
 
-Semantic HTML5, custom CSS, Bootstrap 5.3.8 and vanilla JavaScript. Bootstrap CSS, its JavaScript bundle and its MIT license are included in `vendor/bootstrap/`. All runtime assets are local; no package installation or internet connection is required to run the downloaded project.
+Semantic HTML5, custom CSS, Bootstrap 5.3.8, JavaScript and jQuery 4.0.0. Bootstrap CSS, its JavaScript bundle and its MIT license are included in `vendor/bootstrap/`. The site requests jQuery from its official CDN and falls back to the identical copy in vendor/jquery. No build or package installation is required.
 
 ## Run locally
 
-Open `index.html` in a browser, or run `python3 -m http.server 8000` from the project directory and visit http://localhost:8000. No build or package installation is required.
+Open `index.html` in a browser, or run `python3 -m http.server 8000` from the project directory and visit http://localhost:8000. Use the local server for testing the Copy buttons because clipboard access depends on browser permissions.
 
 ## GitHub Pages
 
@@ -61,3 +61,34 @@ The work continues the shared commit `43bb43a`: the original FAQ, subscription p
 Each page has a skip link, one main heading, semantic sections, a labeled navigation, current-page indication and descriptive image alternatives. Forms have visible labels. Tables scroll inside their containers on narrow screens. Keyboard focus remains visible, and motion preferences are respected.
 
 See `DEFENSE_RU.md` for Assignment 4 explanations, a demonstration script and live-edit practice. `DEFENSE.md` retains the earlier HTML/Bootstrap notes.
+
+## Assignment 5: advanced JavaScript and DOM
+
+| Requirement | Feature / implementation |
+| --- | --- |
+| DOM selection, content, attributes and styling | Personal greeting, dynamic resource cards, theme / ARIA updates |
+| Dynamic styling | Day/night theme on all pages; saved preference in localStorage |
+| One manipulation option | Personalized greeting on Home (safe textContent; submit/Enter) |
+| Click and keyboard listeners | Theme, filters, sound, greeting; arrow/Home/End navigation |
+| Callback option | Three-step Contact form; createStepController(total, onStepChange) |
+| Switch | Resource categories and arrow-key navigation |
+| Objects and methods | catalog.items, filterByCategory(), render() |
+| Arrays, loops, higher-order functions | Array of resource objects; for...of; filter()/forEach() |
+| Sound | User-triggered Web Audio signal with overlap guard and cleanup |
+| Event-triggered animations | Greeting, cards and form steps; reduced motion supported |
+| Separation | HTML markup, css/style.css, js/site.js and js/assignment5.js |
+
+Contact is a demo, not a real account or messaging endpoint. Next validates the current step; final submission validates all required fields using JavaScript rules. Back retains input and Reset returns to the first step. The old light-background control applies only in day mode. Only the theme is stored; no names, messages or passwords are persisted.
+
+New code is in `js/assignment5.js`, loaded after the shared `js/site.js`. Run the browser regression suite with Playwright installed: `node tests/assignment5.cjs`. Optional `PLAYWRIGHT_MODULE` and `CHROME_EXECUTABLE` select existing local installations; no npm dependency is required to run the website itself. The suite starts a local server, checks the UI at 390/768/1440px, validates failure cases and captures actual browser evidence in `output/assignment5/evidence/`. Set `TEST_BASE_URL` to test a deployed copy after publication.
+
+See `DEFENSE_ASSIGNMENT5_RU.md` for a demonstration sequence and detailed explanations. Submission artifacts are in `output/pdf/` and `output/assignment5/`. Human defense and LMS submission must be completed by each team member.
+
+## Assignment 6: jQuery
+
+- Resources: type a title or description keyword. Suggestions are selectable with the mouse or keyboard. The results combine search and the current category, and matching terms are highlighted.
+- Home: scroll to see the reading progress and reload to replay the number counters.
+- Contact: complete the existing form with demo values to see the disabled submit button, spinner and success toast. Use Copy beside an email address to test clipboard feedback.
+- About: scroll to Campus Moments and move between slides. Gallery images load when their slides enter the viewport.
+
+The new behavior is in `js/script.js`. The contact form simulates a short wait after validation and handles no real submissions.
