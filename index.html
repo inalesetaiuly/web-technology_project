@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Campus Life: a student guide to study spaces, campus resources and student community.">
     <title>Campus Life | Home</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b2545'/%3E%3Ctext x='32' y='42' text-anchor='middle' fill='white' font-family='Arial' font-size='30' font-weight='bold'%3ECL%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="images/campus-mark.svg" type="image/svg+xml">
 
     <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -15,7 +15,7 @@
     <script src="js/script.js" defer></script>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="page-index d-flex flex-column min-vh-100">
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <div id="reading-progress" role="progressbar" aria-label="Page scroll progress"
         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
@@ -23,9 +23,12 @@
     </div>
 
     <header>
-        <nav aria-label="Main navigation" class="navbar navbar-expand-lg site-navbar" data-bs-theme="dark">
+        <nav aria-label="Main navigation" class="navbar navbar-expand-lg site-navbar">
             <div class="container">
-                <a class="navbar-brand fw-bold" href="index.html">Campus Life</a>
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/campus-mark.svg" width="36" height="36" alt="">
+                    <span>Campus<span class="brand-space"> Life</span></span>
+                </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false"
@@ -36,25 +39,35 @@
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">Community</a></li>
                         <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     </ul>
-                    <button type="button" class="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
+                    <button type="button" class="btn theme-switch ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main id="main-content" tabindex="-1" class="container flex-grow-1 py-4">
-        <section class="hero-section text-center p-4 p-md-5 mb-4" aria-labelledby="home-title">
-            <p class="eyebrow mb-2">Student guide</p>
-            <h1 id="home-title" class="page-title hero-title mb-3">Make campus<br>feel like home.</h1>
-            <p class="lead mx-auto hero-copy">Your student guide to studying smarter, finding your people and making the most of campus.</p><div class="d-flex flex-wrap gap-3 justify-content-center mt-4"><a href="resources.html" class="btn btn-light btn-lg">Explore resources</a><a href="about.html" class="btn btn-outline-light btn-lg">Meet the community</a></div>
+    <main id="main-content" tabindex="-1" class="container flex-grow-1">
+        <section class="home-hero" aria-labelledby="home-title">
+            <div class="hero-content">
+                <p class="eyebrow hero-kicker"><span aria-hidden="true"></span> THE STUDENT FIELD GUIDE</p>
+                <h1 id="home-title">Find your<br>place<span>.</span></h1>
+                <p class="hero-description">From quiet study corners to the people who make campus feel like home.</p>
+                <div class="hero-actions">
+                    <a href="resources.html" class="btn btn-lime">Explore resources <span aria-hidden="true">↗</span></a>
+                    <a href="about.html" class="hero-link">Meet the community <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+            <figure class="hero-photo">
+                <img src="images/campus-hero.jpg" alt="Students walking together across a sunny campus" fetchpriority="high">
+                <figcaption><span>01 / CAMPUS LIFE</span><span aria-hidden="true">✦</span></figcaption>
+            </figure>
         </section>
 
-        <section class="section-panel p-4 mb-4" aria-labelledby="stats-title">
-            <h2 id="stats-title" class="h4 mb-3">Campus Life at a glance</h2>
+        <section class="stats-band" aria-labelledby="stats-title">
+            <h2 id="stats-title" class="stats-title">At a glance</h2>
             <dl class="campus-stats mb-0">
                 <div><dt>Featured resources</dt><dd><span data-count-to="3">3</span></dd></div>
                 <div><dt>Gallery photos</dt><dd><span data-count-to="9">9</span></dd></div>
@@ -62,115 +75,88 @@
             </dl>
         </section>
 
-        <section id="campus-tools" class="section-panel p-4 mb-4" aria-labelledby="tools-title">
-            <div class="row g-4 align-items-center">
-                <div class="col-12 col-lg-7">
-                    <p class="tool-label">Your campus, your pace</p>
-                    <h2 id="tools-title">A moment for your day</h2>
-                    <p class="mb-2">Current date and time on your device</p>
-                    <time id="current-datetime" class="live-clock">Enable JavaScript to see the live clock.</time>
-                    <p id="clock-zone" class="small text-secondary mt-2 mb-0"></p>
+        <section class="feature-section" aria-labelledby="explore-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">THE CAMPUS EDIT</p>
+                    <h2 id="explore-title">Find your next move.</h2>
                 </div>
-                <div class="col-12 col-lg-5">
-                    <h3 class="h5">Set the mood</h3>
-                    <p class="small">Choose a calm background for your study break.</p>
-                    <button id="change-background" class="btn btn-outline-primary" type="button">Change background</button>
-                    <p id="background-status" class="small mt-2 mb-0" role="status">Background: Warm paper</p>
-                    <button id="play-notification" class="btn btn-outline-primary mt-3" type="button">Play notification sound</button>
-                    <p id="sound-status" class="small mt-2 mb-0" role="status">A short campus reminder, played on request.</p>
-                </div>
+                <p>A few good places to start, wherever you are in your semester.</p>
             </div>
-        </section>
-
-        <section class="section-panel p-4 mb-4" aria-labelledby="greeting-title">
-            <p class="tool-label">Make it personal</p>
-            <h2 id="greeting-title">Your campus welcome</h2>
-            <form id="greeting-form" novalidate>
-                <label class="form-label" for="greeting-name">Your name</label>
-                <div class="d-flex flex-wrap gap-2">
-                    <input id="greeting-name" class="form-control greeting-input" type="text" autocomplete="given-name" maxlength="60" aria-describedby="greeting-error" required>
-                    <button type="submit" class="btn btn-primary">Say hello</button>
-                </div>
-                <p id="greeting-error" class="field-error" hidden></p>
-            </form>
-            <p id="personal-greeting" class="mt-3 mb-0" role="status">Welcome to Campus Life!</p>
-        </section>
-
-        <section class="section-panel p-4 mb-5" aria-labelledby="welcome-title">
-            <div class="row g-4 align-items-center">
-                <div class="col-12 col-lg-6">
-                    <h2 id="welcome-title">Welcome to Campus Life</h2>
-                    <p>
-                        Campus Life is a student guide designed to help students organize their study time
-                        and discover useful campus resources.
-                    </p>
-                    <h3 class="h5 mt-4">What you can find here</h3>
-                    <ul class="mb-0">
-                        <li>Study tips</li>
-                        <li>Campus resources</li>
-                        <li>Student activities</li>
-                    </ul>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <img decoding="async" class="img-fluid rounded shadow-sm" src="images/campus.jpg"
-                        alt="Students studying on a university campus">
-                </div>
-            </div>
-        </section>
-
-        <section class="features-section mb-5" aria-labelledby="explore-title">
-            <h2 id="explore-title" class="text-center mb-4">Explore Campus Life</h2>
-
             <div class="media-card-container">
                 <article class="media-card">
-                    <img loading="lazy" decoding="async" src="images/studypng.png" alt="Students studying">
-                    <h3><span class="card-icon" aria-hidden="true">✏️</span> Study Tips</h3>
-                    <p>
-                        Discover useful strategies to organize your study time and improve your academic performance.
-                    </p>
-                    <a href="resources.html#study-tips" class="btn btn-primary media-card-button">Read study tips</a>
+                    <a href="resources.html#study-tips" class="feature-link">
+                        <img loading="lazy" decoding="async" src="images/studypng.png" alt="Students working together at a table">
+                        <div class="feature-copy"><p class="eyebrow">01 / STUDY</p><h3>Build a study routine</h3><p>Make a plan that works for your week.</p><span class="feature-arrow" aria-hidden="true">↗</span></div>
+                    </a>
                 </article>
-
                 <article class="media-card">
-                    <img loading="lazy" decoding="async" src="images/library.png" alt="University library">
-                    <h3><span class="card-icon" aria-hidden="true">📚</span> Campus Resources</h3>
-                    <p>
-                        Find useful information about libraries, computer labs, study areas and other campus facilities.
-                    </p>
-                    <a href="resources.html" class="btn btn-primary media-card-button">Explore</a>
+                    <a href="resources.html" class="feature-link">
+                        <img loading="lazy" decoding="async" src="images/library.png" alt="Students studying between library shelves">
+                        <div class="feature-copy"><p class="eyebrow">02 / EXPLORE</p><h3>Find your study spot</h3><p>Browse libraries, labs and quiet corners.</p><span class="feature-arrow" aria-hidden="true">↗</span></div>
+                    </a>
                 </article>
-
                 <article class="media-card">
-                    <img loading="lazy" decoding="async" src="images/activities.png" alt="Students participating in activities">
-                    <h3><span class="card-icon" aria-hidden="true">🎓</span> Student Activities</h3>
-                    <p>
-                        Learn about student clubs, events and opportunities to participate in campus life.
-                    </p>
-                    <a href="about.html" class="btn btn-primary media-card-button">Discover</a>
+                    <a href="about.html#moments-title" class="feature-link">
+                        <img loading="lazy" decoding="async" src="images/activities.png" alt="Students chatting at a campus club fair">
+                        <div class="feature-copy"><p class="eyebrow">03 / CONNECT</p><h3>Meet the community</h3><p>See a different side of campus life.</p><span class="feature-arrow" aria-hidden="true">↗</span></div>
+                    </a>
                 </article>
             </div>
         </section>
 
-        <section class="section-panel p-4 text-center" aria-labelledby="started-title">
-            <h2 id="started-title">How to get started</h2>
-            <ol class="steps-list text-start mx-auto mb-4">
-                <li>Choose your study goal.</li>
-                <li>Plan your week.</li>
-                <li>Use available campus resources.</li>
-            </ol>
-            <div class="d-flex flex-wrap gap-2 justify-content-center" role="group" aria-label="Quick navigation">
-                <a class="btn btn-primary btn-lg" href="resources.html">View Resources</a>
-                <a class="btn btn-outline-primary btn-lg" href="contact.html">Contact Us</a>
-            </div>
-        </section>
+        <div class="campus-widgets">
+            <section class="section-panel welcome-panel" aria-labelledby="greeting-title">
+                <p class="tool-label">Make it personal</p>
+                <h2 id="greeting-title">Your campus welcome</h2>
+                <form id="greeting-form" novalidate>
+                    <label class="form-label" for="greeting-name">Your name</label>
+                    <div class="d-flex flex-wrap gap-2">
+                        <input id="greeting-name" class="form-control greeting-input" type="text" autocomplete="given-name" maxlength="60" aria-describedby="greeting-error" required>
+                        <button type="submit" class="btn btn-primary">Say hello</button>
+                    </div>
+                    <p id="greeting-error" class="field-error" hidden></p>
+                </form>
+                <p id="personal-greeting" class="mt-3 mb-0" role="status">Welcome to Campus Life!</p>
+            </section>
+            <section id="campus-tools" class="section-panel tool-panel" aria-labelledby="tools-title">
+                <div class="row g-4 align-items-center">
+                    <div class="col-12 col-xl-6">
+                        <p class="tool-label">Your campus, your pace</p>
+                        <h2 id="tools-title">A moment for your day</h2>
+                        <p class="mb-2">Current date and time on your device</p>
+                        <time id="current-datetime" class="live-clock">Enable JavaScript to see the live clock.</time>
+                        <p id="clock-zone" class="small text-secondary mt-2 mb-0"></p>
+                    </div>
+                    <div class="col-12 col-xl-6">
+                        <h3 class="h5">Set the mood</h3>
+                        <p class="small">Choose a calm background for your study break.</p>
+                        <button id="change-background" class="btn btn-outline-primary" type="button">Change background</button>
+                        <p id="background-status" class="small mt-2 mb-0" role="status">Background: Warm paper</p>
+                        <button id="play-notification" class="btn btn-outline-primary mt-3" type="button">Play notification sound</button>
+                        <p id="sound-status" class="small mt-2 mb-0" role="status">A short campus reminder, played on request.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <footer class="site-footer mt-auto py-3">
-        <div class="container text-center">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-                <div><a class="footer-brand" href="index.html">Campus Life</a><p class="small mb-0 mt-1">A little guidance. A better campus experience.</p></div>
-                <p class="small mb-0">Yessetaiuly Inal &amp; Nurkeldi Baizhigit</p>
+    <footer class="site-footer mt-auto">
+        <div class="container">
+            <div class="footer-main">
+                <div>
+                    <a class="footer-brand" href="index.html"><img src="images/campus-mark.svg" width="36" height="36" alt="">Campus Life</a>
+                    <p class="footer-description">A student field guide to finding your place on campus.</p>
+                </div>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="resources.html">Explore resources <span aria-hidden="true">↗</span></a>
+                    <a href="about.html">Meet the team <span aria-hidden="true">↗</span></a>
+                    <a href="contact.html">Get in touch <span aria-hidden="true">↗</span></a>
+                </nav>
+            </div>
+            <div class="footer-meta">
+                <span>ASTANA IT UNIVERSITY · STUDENT PROJECT</span>
+                <span>Yessetaiuly Inal &amp; Nurkeldi Baizhigit</span>
             </div>
         </div>
     </footer>

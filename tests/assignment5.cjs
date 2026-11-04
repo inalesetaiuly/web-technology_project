@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
     if (!requested.startsWith(root + path.sep) || !fs.existsSync(requested) || !fs.statSync(requested).isFile()) {
         res.writeHead(404); res.end(); return;
     }
-    const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.jpg': 'image/jpeg' };
+    const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml' };
     res.setHeader('Content-Type', types[path.extname(requested).toLowerCase()] || 'application/octet-stream');
     res.end(fs.readFileSync(requested));
 });
@@ -122,7 +122,14 @@ async function run() {
             await page.waitForFunction(() => getComputedStyle(document.body).backgroundColor === 'rgb(231, 240, 250)');
             assert.notEqual(await page.locator('body').evaluate(el => getComputedStyle(el).backgroundColor), before);
             await page.locator('[data-theme-toggle]').click();
-            await page.waitForFunction(() => getComputedStyle(document.body).backgroundColor === 'rgb(16, 25, 35)');
+            await page.waitForFunction(() => {
+                const reference = document.createElement('div');
+                reference.style.backgroundColor = 'var(--page-background)';
+                document.body.append(reference);
+                const expected = getComputedStyle(reference).backgroundColor;
+                reference.remove();
+                return getComputedStyle(document.body).backgroundColor === expected;
+            });
             const dark = await page.locator('body').evaluate(el => getComputedStyle(el).backgroundColor);
             await page.locator('#change-background').click();
             assert.equal(await page.locator('body').evaluate(el => getComputedStyle(el).backgroundColor), dark);

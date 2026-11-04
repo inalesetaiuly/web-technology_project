@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Campus Life: a student guide to study spaces, campus resources and student community.">
     <title>Campus Life | About Us</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b2545'/%3E%3Ctext x='32' y='42' text-anchor='middle' fill='white' font-family='Arial' font-size='30' font-weight='bold'%3ECL%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="images/campus-mark.svg" type="image/svg+xml">
 
     <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -15,7 +15,7 @@
     <script src="js/script.js" defer></script>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="page-about d-flex flex-column min-vh-100">
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <div id="reading-progress" role="progressbar" aria-label="Page scroll progress"
         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
@@ -23,9 +23,12 @@
     </div>
 
     <header>
-        <nav aria-label="Main navigation" class="navbar navbar-expand-lg site-navbar" data-bs-theme="dark">
+        <nav aria-label="Main navigation" class="navbar navbar-expand-lg site-navbar">
             <div class="container">
-                <a class="navbar-brand fw-bold" href="index.html">Campus Life</a>
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/campus-mark.svg" width="36" height="36" alt="">
+                    <span>Campus<span class="brand-space"> Life</span></span>
+                </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false"
@@ -36,21 +39,30 @@
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="about.html">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="about.html">Community</a></li>
                         <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     </ul>
-                    <button type="button" class="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
+                    <button type="button" class="btn theme-switch ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main id="main-content" tabindex="-1" class="container flex-grow-1 py-4">
-        <section class="page-heading mb-5"><p class="eyebrow">Campus Life / About Us</p><h1 class="page-title">About Us</h1><p class="lead mb-0">Built by students, for students.</p></section>
+    <main id="main-content" tabindex="-1" class="container flex-grow-1">
+        <section class="page-heading masthead-about" aria-labelledby="page-title">
+            <div class="masthead-copy">
+                <p class="eyebrow">02 / OUR COMMUNITY</p>
+                <h1 class="page-title" id="page-title">Built by students.</h1>
+                <p class="masthead-description">Meet the team behind the guide and see what campus life looks like beyond the lecture hall.</p>
+                <a class="masthead-link" href="#moments-title">Explore the gallery <span aria-hidden="true">↓</span></a>
+            </div>
+            <div class="masthead-orbit" aria-hidden="true"><span>✦</span></div>
+        </section>
 
         <section class="section-panel p-4 mb-5" aria-labelledby="team-title">
-            <h2 id="team-title" class="mb-4">Our Team</h2>
+            <p class="eyebrow">THE PEOPLE BEHIND THE GUIDE</p>
+            <h2 id="team-title" class="mb-4">Meet the team.</h2>
 
             <div class="row g-4">
                 <article class="col-12 col-lg-6">
@@ -109,6 +121,7 @@
         </section>
 
         <section class="section-panel p-4" aria-labelledby="moments-title">
+            <p class="eyebrow">THE PHOTO JOURNAL / 09 FRAMES</p>
             <h2 id="moments-title" class="mb-4">Campus Moments</h2>
 
             <div id="campusCarousel" class="carousel slide campus-carousel" aria-label="Campus photo gallery">
@@ -193,11 +206,22 @@
         </section>
     </main>
 
-    <footer class="site-footer mt-auto py-3">
-        <div class="container text-center">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-                <div><a class="footer-brand" href="index.html">Campus Life</a><p class="small mb-0 mt-1">A little guidance. A better campus experience.</p></div>
-                <p class="small mb-0">Yessetaiuly Inal &amp; Nurkeldi Baizhigit</p>
+    <footer class="site-footer mt-auto">
+        <div class="container">
+            <div class="footer-main">
+                <div>
+                    <a class="footer-brand" href="index.html"><img src="images/campus-mark.svg" width="36" height="36" alt="">Campus Life</a>
+                    <p class="footer-description">A student field guide to finding your place on campus.</p>
+                </div>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="resources.html">Explore resources <span aria-hidden="true">↗</span></a>
+                    <a href="about.html">Meet the team <span aria-hidden="true">↗</span></a>
+                    <a href="contact.html">Get in touch <span aria-hidden="true">↗</span></a>
+                </nav>
+            </div>
+            <div class="footer-meta">
+                <span>ASTANA IT UNIVERSITY · STUDENT PROJECT</span>
+                <span>Yessetaiuly Inal &amp; Nurkeldi Baizhigit</span>
             </div>
         </div>
     </footer>
