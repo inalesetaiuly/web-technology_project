@@ -66,11 +66,13 @@
                     <div class="catalog-controls">
                         <div id="resource-search-box" class="mb-3" hidden>
                             <label for="resource-search" class="form-label">Search campus resources</label>
-                            <input id="resource-search" class="form-control" type="search" maxlength="100"
-                                autocomplete="off" placeholder="Try library or study"
-                                aria-controls="resource-cards resource-suggestions">
-                            <div id="resource-suggestions" class="list-group mt-1" role="group"
-                                aria-label="Search suggestions" hidden></div>
+                            <div class="resource-search-row">
+                                <input id="resource-search" class="form-control" type="search" maxlength="100"
+                                    autocomplete="off" placeholder="Try library or study"
+                                    aria-controls="resource-cards resource-suggestions">
+                                <div id="resource-suggestions" class="list-group" role="group"
+                                    aria-label="Search suggestions" hidden></div>
+                            </div>
                         </div>
                         <div id="resource-filters" class="d-flex flex-wrap gap-2 mb-3" role="group" aria-label="Filter campus resources" hidden>
                             <button class="btn btn-outline-primary" type="button" data-category="all" aria-pressed="true">All</button>

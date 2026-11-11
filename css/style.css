@@ -258,8 +258,25 @@ main.container { padding-block: clamp(1.25rem, 3vw, 2.6rem) clamp(3rem, 7vw, 6re
 .resource-sidebar .list-group-item { background: transparent; color: var(--text); border-color: var(--border); }
 .resource-sidebar a { display: block; font-size: .9rem; font-weight: 650; }
 .catalog-controls { border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); padding: .95rem 1.1rem .1rem; margin-bottom: .85rem; }
-#resource-search-box { max-width: 37rem; }
+#resource-search { max-width: 37rem; }
+#resource-suggestions { margin-top: .25rem; }
 #resource-suggestions .list-group-item { overflow-wrap: anywhere; }
+@media (min-width: 768px) {
+    .resource-search-row {
+        --search-field-width: min(66%, 37rem);
+        position: relative;
+    }
+    #resource-search { width: var(--search-field-width); }
+    #resource-suggestions {
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline-start: calc(var(--search-field-width) + .75rem);
+        inset-inline-end: 0;
+        z-index: 2;
+        margin-top: 0;
+        box-shadow: 0 .45rem 1rem #19231e14;
+    }
+}
 #resource-filters [aria-pressed="true"] { background: var(--lime); color: #19231e; border-color: var(--lime); }
 #resource-count { color: var(--muted); }
 .resource-card .card-img-top { height: 11rem; object-fit: cover; }
