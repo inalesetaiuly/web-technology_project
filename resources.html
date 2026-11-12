@@ -41,8 +41,11 @@
                         <li class="nav-item"><a class="nav-link" href="about.html">Community</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="resources.html">Resources</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="account.html">Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
                     </ul>
-                    <button type="button" class="btn theme-switch ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
+                    <button type="button" class="btn theme-switch ms-lg-3 mt-2 mt-lg-0"
+                        data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
                 </div>
             </div>
         </nav>
@@ -51,10 +54,9 @@
     <main id="main-content" tabindex="-1" class="container flex-grow-1">
         <section class="page-heading masthead-resources" aria-labelledby="page-title">
             <div class="masthead-copy">
-                <p class="eyebrow">01 / STUDENT RESOURCES</p>
+                <p class="eyebrow">Student resources</p>
                 <h1 class="page-title" id="page-title">Find what you need.</h1>
                 <p class="masthead-description">Search the campus guide for study spaces, the library and places to get involved.</p>
-
             </div>
             <div class="masthead-orbit" aria-hidden="true"><span>✦</span></div>
         </section>
@@ -62,7 +64,12 @@
         <div class="row g-4 align-items-start resource-layout">
             <div class="col-12 col-lg-9">
                 <section id="resource-catalog" class="catalog-section mb-4" aria-labelledby="featured-resources-title">
-                    <div class="section-heading"><div><p class="eyebrow">BROWSE THE GUIDE</p><h2 id="featured-resources-title">Featured Resources</h2></div></div>
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">Browse the guide</p>
+                            <h2 id="featured-resources-title">Featured Resources</h2>
+                        </div>
+                    </div>
                     <div class="catalog-controls">
                         <div id="resource-search-box" class="mb-3" hidden>
                             <label for="resource-search" class="form-label">Search campus resources</label>
@@ -81,7 +88,7 @@
                         </div>
                     </div>
                     <p id="resource-count" class="small" role="status">3 campus resources</p>
-                    <p id="resource-no-results" class="section-panel p-3" hidden>No resources match. Try a different term or category.</p>
+                    <p id="resource-no-results" class="section-panel" hidden>No resources match. Try a different term or category.</p>
                     <div id="resource-cards" class="row g-4">
                         <div class="col-12 col-md-6 col-lg-4">
                             <article class="card resource-card h-100">
@@ -118,8 +125,46 @@
                     </div>
                 </section>
 
-                <section id="study-tips" class="section-panel p-4 mb-4" aria-labelledby="study-title"><h2 id="study-title">Build a study routine</h2><div class="row g-4 mt-1"><div class="col-12 col-md-4"><h3 class="h5">01 / Plan your week</h3><p class="mb-0">List deadlines and reserve short, realistic study sessions before your week starts.</p></div><div class="col-12 col-md-4"><h3 class="h5">02 / Practice actively</h3><p class="mb-0">Test yourself, explain an idea aloud and revisit the questions you find difficult.</p></div><div class="col-12 col-md-4"><h3 class="h5">03 / Take a break</h3><p class="mb-0">Pause between focused sessions. Ask classmates or an advisor when you need help.</p></div></div></section>
-                <section class="section-panel p-4" aria-labelledby="resource-table-title">
+                <section id="find-books" class="section-panel mb-4" aria-labelledby="book-title">
+                    <h2 id="book-title">Find books</h2>
+                    <p class="text-body-secondary">
+                        Search <a href="https://openlibrary.org/">Open Library</a>,
+                        with <a href="https://books.apple.com/us/">Apple Books</a> as a backup.
+                    </p>
+                    <form id="book-search" class="row g-2 align-items-end" novalidate hidden>
+                        <div class="col-12 col-sm">
+                            <label class="form-label" for="book-query">Title or author</label>
+                            <input class="form-control" id="book-query" type="search"
+                                placeholder="Try JavaScript or Jane Austen" aria-describedby="book-query-error">
+                        </div>
+                        <div class="col-12 col-sm-auto">
+                            <button class="btn btn-primary" type="submit">Search books</button>
+                        </div>
+                        <p id="book-query-error" class="col-12 field-error" hidden></p>
+                    </form>
+                    <noscript><p>Enable JavaScript to search here, or open the catalog using the link above.</p></noscript>
+                    <p id="book-status" class="form-status mt-3 mb-0" role="status"></p>
+                    <ul id="book-results" class="list-group list-group-flush mt-2 text-break" hidden></ul>
+                </section>
+
+                <section id="study-tips" class="section-panel mb-4" aria-labelledby="study-title">
+                    <h2 id="study-title">Build a study routine</h2>
+                    <div class="row g-4 mt-1">
+                        <div class="col-12 col-md-4">
+                            <h3 class="h5">01 / Plan your week</h3>
+                            <p class="mb-0">List deadlines and reserve short, realistic study sessions before your week starts.</p>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <h3 class="h5">02 / Practice actively</h3>
+                            <p class="mb-0">Test yourself, explain an idea aloud and revisit the questions you find difficult.</p>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <h3 class="h5">03 / Take a break</h3>
+                            <p class="mb-0">Pause between focused sessions. Ask classmates or an advisor when you need help.</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="section-panel" aria-labelledby="resource-table-title">
                     <h2 id="resource-table-title" class="mb-3">Resource Directory</h2>
                     <div class="table-responsive">
                         <table class="table table-striped table-hover align-middle mb-0">
@@ -154,17 +199,19 @@
             </div>
             <aside class="col-12 col-lg-3 resource-aside">
                 <div class="resource-sidebar p-4 h-100">
-                    <p class="eyebrow">ON THIS PAGE</p><h2 class="h4">Quick links</h2>
+                    <p class="eyebrow">On this page</p>
+                    <h2 class="h4">Quick links</h2>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item px-0"><a href="#study-spaces">Study Spaces</a></li>
                         <li class="list-group-item px-0"><a href="#library">Library</a></li>
+                        <li class="list-group-item px-0"><a href="#find-books">Find books</a></li>
                         <li class="list-group-item px-0"><a href="#resource-table-title">Computer Labs</a></li>
                         <li class="list-group-item px-0"><a href="#student-center">Student Center</a></li>
                     </ul>
                 </div>
             </aside>
         </div>
-        <section id="campus-faq" class="section-panel p-4 mt-4" aria-labelledby="faq-title">
+        <section id="campus-faq" class="section-panel mt-4" aria-labelledby="faq-title">
             <p class="tool-label">Quick answers</p>
             <h2 id="faq-title">Frequently Asked Questions</h2>
             <div class="faq-item">
@@ -184,7 +231,7 @@
                     </button>
                 </h3>
                 <div id="faq-support" class="faq-answer" role="region" aria-labelledby="faq-support-toggle" hidden>
-                    <p>Open the <a href="contact.html">Contact page</a> and select IT Support. The form demonstrates validation; use official university channels for real requests.</p>
+                    <p>Use your university’s official IT help desk for technical support. For feedback about Campus Life, <a href="contact.html#message-section">contact the project team</a>.</p>
                 </div>
             </div>
             <div class="faq-item">
@@ -211,6 +258,8 @@
                     <a href="resources.html">Explore resources <span aria-hidden="true">↗</span></a>
                     <a href="about.html">Meet the team <span aria-hidden="true">↗</span></a>
                     <a href="contact.html">Get in touch <span aria-hidden="true">↗</span></a>
+                    <a href="account.html">Account <span aria-hidden="true">↗</span></a>
+                    <a href="profile.html">Profile <span aria-hidden="true">↗</span></a>
                 </nav>
             </div>
             <div class="footer-meta">
@@ -223,6 +272,7 @@
     <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
     <script src="js/site.js" defer></script>
     <script src="js/assignment5.js" defer></script>
+    <script src="js/books.js" defer></script>
 </body>
 
 </html>

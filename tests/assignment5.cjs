@@ -29,8 +29,27 @@ async function run() {
     const browser = await chromium.launch({ headless: true, ...(process.env.CHROME_EXECUTABLE ? { executablePath: process.env.CHROME_EXECUTABLE } : {}) });
     const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, colorScheme: 'light' });
     const page = await context.newPage();
+    const contactEndpoint = /^https:\/\/formspree\.io\/f\/[a-z0-9]+$/;
+    const contactRequests = [];
+    let contactResponseStatus = 200;
+    await context.route(contactEndpoint, async route => {
+        const request = route.request();
+        const headers = request.headers();
+        const payload = await new Response(request.postDataBuffer(), {
+            headers: { 'content-type': headers['content-type'] }
+        }).formData();
+        contactRequests.push({ url: request.url(), method: request.method(), accept: headers.accept,
+            fields: Object.fromEntries(payload) });
+        await new Promise(resolve => setTimeout(resolve, 500));
+        await route.fulfill({ status: contactResponseStatus, json: { ok: contactResponseStatus === 200 },
+            headers: { 'access-control-allow-origin': '*' } });
+    });
     page.on('pageerror', error => errors.push(error.message));
-    page.on('response', response => { if (response.status() >= 400) failures.push(`${response.status()} ${response.url()}`); });
+    page.on('response', response => {
+        if (response.status() >= 400 && !contactEndpoint.test(response.url())) {
+            failures.push(`${response.status()} ${response.url()}`);
+        }
+    });
     async function check(name, fn) {
         await fn(); results.push(name); console.log(`PASS ${name}`);
     }
@@ -108,11 +127,11 @@ async function run() {
         await check('arrow menu navigation wraps; Home and End work', async () => {
             const links = page.locator('#mainNavbar .nav-link');
             await links.nth(0).focus(); await page.keyboard.press('ArrowLeft');
-            assert.equal(await links.nth(3).evaluate(el => el === document.activeElement), true);
+            assert.equal(await links.last().evaluate(el => el === document.activeElement), true);
             await page.keyboard.press('ArrowRight');
             assert.equal(await links.nth(0).evaluate(el => el === document.activeElement), true);
             await page.keyboard.press('End');
-            assert.equal(await links.nth(3).evaluate(el => el === document.activeElement), true);
+            assert.equal(await links.last().evaluate(el => el === document.activeElement), true);
             await page.keyboard.press('Home');
             assert.equal(await links.nth(0).evaluate(el => el === document.activeElement), true);
         });
@@ -191,6 +210,17 @@ async function run() {
             assert.match(await page.locator('#wizard-step-label').innerText(), /Step 1/);
             assert.equal(await page.locator('#fullname').getAttribute('aria-invalid'), 'true');
         });
+        await check('optional phone validates in JavaScript when provided', async () => {
+            await page.locator('#fullname').fill('Test Student');
+            await page.locator('#email').fill('student@example.com');
+            await page.locator('#phone').fill('123-abc');
+            await page.locator('#wizard-next').click();
+            assert.match(await page.locator('#phone-error').innerText(), /10 to 15 digits/);
+            assert.match(await page.locator('#wizard-step-label').innerText(), /Step 1/);
+            assert.equal(contactRequests.length, 0);
+            await screenshot('wizard-errors', '#message-section');
+            await page.locator('#phone').fill('');
+        });
         await check('wizard preserves values through Next and Back', async () => {
             await contactStep1();
             assert.match(await page.locator('#wizard-step-label').innerText(), /Step 2/);
@@ -201,23 +231,55 @@ async function run() {
         });
         await screenshot('wizard-step2', '#message-section');
         await contactStep2();
-        await check('password length and confirmation enforced without HTML attributes', async () => {
-            await page.locator('#password').evaluate(el => el.removeAttribute('minlength'));
-            await page.locator('#confirm-password').evaluate(el => el.removeAttribute('data-match'));
-            await page.locator('#password').fill('short');
-            await page.locator('#confirm-password').fill('other');
-            await page.locator('#wizard-submit').click();
-            assert.match(await page.locator('#password-error').innerText(), /8 characters/);
-            assert.match(await page.locator('#confirm-password-error').innerText(), /do not match/);
+        await check('review shows the message and human-readable category before sending', async () => {
+            assert.match(await page.locator('#wizard-step-label').innerText(), /Review your message/);
+            assert.equal(await page.locator('[data-review-field="fullname"]').innerText(), 'Test Student');
+            assert.equal(await page.locator('[data-review-field="category"]').innerText(), 'Library Resources');
+            assert.equal(await page.locator('[data-review-field="message"]').innerText(), 'Can I find a quiet study space?');
+            assert.equal(await page.locator('[data-review-field="phone"]').isVisible(), false);
+            assert.equal(contactRequests.length, 0);
         });
-        await screenshot('wizard-errors', '#message-section');
-        await check('valid final submission succeeds and clears practice passwords', async () => {
-            await page.locator('#password').fill('CampusDemo26');
-            await page.locator('#confirm-password').fill('CampusDemo26');
+        await check('Formspree failure keeps the draft and re-enables the send button', async () => {
+            contactResponseStatus = 429;
+            await page.locator('#wizard-submit').click();
+            assert.equal(await page.locator('#wizard-submit').isDisabled(), true);
+            assert.equal(await page.locator('#wizard-back').isDisabled(), true);
+            assert.equal(await page.locator('#wizard-submit .spinner-border').isVisible(), true);
+            await page.locator('#form-status.alert-danger').waitFor();
+            assert.match(await page.locator('#form-status').innerText(), /Too many submissions/);
+            assert.equal(await page.locator('#wizard-submit').isEnabled(), true);
+            assert.equal(await page.locator('#message').inputValue(), 'Can I find a quiet study space?');
+            assert.equal(contactRequests.length, 1);
+        });
+        await check('valid retry sends only validated fields and resets after Formspree accepts', async () => {
+            contactResponseStatus = 200;
+            await page.locator('#wizard-back').click();
+            await page.locator('#wizard-back').click();
+            await page.locator('#phone').fill('+7 (700) 123-45-67');
+            await page.locator('#wizard-next').click();
+            await page.locator('#wizard-next').click();
+            assert.equal(await page.locator('[data-review-field="phone"]').innerText(), '+7 (700) 123-45-67');
+            await page.locator('#contact-form').evaluate(form => {
+                const extra = document.createElement('input');
+                extra.name = 'password';
+                extra.type = 'hidden';
+                extra.value = 'must not be submitted';
+                form.append(extra);
+            });
             await page.locator('#wizard-submit').click();
             await page.locator('#form-status.alert-success').waitFor();
-            assert.match(await page.locator('#form-status').innerText(), /All fields are valid/);
-            assert.equal(await page.locator('#password').inputValue(), '');
+            assert.match(await page.locator('#form-status').innerText(), /Your message was submitted/);
+            assert.equal(await page.locator('#campus-toast').isVisible(), true);
+            assert.equal(await page.locator('#message').inputValue(), '');
+            assert.match(await page.locator('#wizard-step-label').innerText(), /Step 1/);
+            assert.equal(contactRequests.length, 2);
+            assert.deepEqual(contactRequests[1], {
+                url: 'https://formspree.io/f/xvkaownp', method: 'POST', accept: 'application/json',
+                fields: {
+                    fullname: 'Test Student', email: 'student@example.com', phone: '+7 (700) 123-45-67',
+                    subject: 'Library study session', category: 'library', message: 'Can I find a quiet study space?'
+                }
+            });
         });
         await screenshot('wizard-success', '#message-section');
         await check('reset returns to step one and clears messages', async () => {
@@ -226,20 +288,19 @@ async function run() {
             assert.equal(await page.locator('#fullname').inputValue(), '');
             assert.equal(await page.locator('#form-status').innerText(), '');
         });
-        for (const id of ['fullname', 'email', 'subject', 'category', 'message', 'password', 'confirm-password']) {
+        for (const id of ['fullname', 'email', 'subject', 'category', 'message']) {
             await check(`deleted mandatory field ${id} cannot pass`, async () => {
                 await open('contact.html'); await contactStep1(); await contactStep2();
-                await page.locator('#password').fill('CampusDemo26'); await page.locator('#confirm-password').fill('CampusDemo26');
                 await page.locator('#' + id).evaluate(el => el.remove());
                 await page.locator('#wizard-submit').click();
                 assert.match(await page.locator('#form-status').innerText(), /missing or unavailable/);
                 assert.equal(await page.locator('#form-status').evaluate(el => el.classList.contains('alert-success')), false);
+                assert.equal(contactRequests.length, 2);
             });
         }
         await check('tampered earlier email returns to its visible step', async () => {
             await open('contact.html'); await contactStep1(); await contactStep2();
-            await page.locator('#password').fill('CampusDemo26'); await page.locator('#confirm-password').fill('CampusDemo26');
-            await page.locator('#email').evaluate(el => { el.removeAttribute('required'); el.type = 'text'; el.value = 'bad-email'; });
+            await page.locator('#email').evaluate(el => { el.value = 'bad-email'; });
             await page.locator('#wizard-submit').click();
             assert.match(await page.locator('#wizard-step-label').innerText(), /Step 1/);
             assert.equal(await page.locator('#email').isVisible(), true);

@@ -72,6 +72,7 @@ function setupResourceSearch($) {
     $(document).on('click', function (event) {
         if (!$box[0].contains(event.target)) $suggestions.prop('hidden', true);
     });
+    // Category changes rebuild the cards, so reapply the current text search to the new elements.
     $cards.on('catalog-rendered', () => updateSearch(false));
     $cards.on('catalog-reveal', () => $input.val(''));
     $box.prop('hidden', false);
@@ -109,21 +110,15 @@ function setupAnimatedCounters($, reduceMotion) {
 function setupFormFeedback($, reduceMotion) {
     const $form = $('#contact-form');
     if (!$form.length) return;
+    const form = $form[0];
     const $submit = $('#wizard-submit');
+    const $actions = $form.find('button');
     const $status = $('#form-status');
     const $toast = $('#campus-toast');
-    let submitTimer;
-
-    function restoreButton() {
-        if (!submitTimer) return;
-        window.clearTimeout(submitTimer);
-        submitTimer = undefined;
-        $submit.prop('disabled', false).removeAttr('aria-busy').text('Check message');
-    }
 
     function showToast() {
         $toast.stop(true, true).hide().prop('hidden', false)
-            .text('Demo form checked successfully.')
+            .text('Message submitted.')
             .fadeIn(reduceMotion ? 0 : 180)
             .delay(3200)
             .fadeOut(reduceMotion ? 0 : 400, function () {
@@ -131,22 +126,49 @@ function setupFormFeedback($, reduceMotion) {
             });
     }
 
-    $form.on('validation-success', function (event) {
-        if (submitTimer) return;
-        const message = event.originalEvent.detail.message;
-        $status.text('').removeClass('alert alert-success');
-        $submit.prop('disabled', true).attr('aria-busy', 'true').empty()
-            .append($('<span>', { class: 'spinner-border spinner-border-sm me-2', 'aria-hidden': 'true' }))
-            .append('Please wait…');
+    $form.on('validation-success', async function (event) {
+        if ($submit.prop('disabled')) return;
 
-        submitTimer = window.setTimeout(function () {
-            restoreButton();
-            $status.text(message).addClass('alert alert-success');
+        // Only the fields accepted by the validator are sent to Formspree.
+        const payload = new FormData();
+        for (const [name, value] of Object.entries(event.originalEvent.detail.values)) {
+            if (value) payload.append(name, value);
+        }
+        $actions.prop('disabled', true);
+        $status.text('Sending your message…');
+        $submit.attr('aria-busy', 'true').empty()
+            .append($('<span>', { class: 'spinner-border spinner-border-sm me-2', 'aria-hidden': 'true' }))
+            .append('Sending…');
+
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 15000);
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                body: payload,
+                signal: controller.signal
+            });
+            if (!response.ok) {
+                const message = response.status === 429
+                    ? 'Too many submissions. Wait a moment and try again.'
+                    : 'The message could not be submitted. Your draft is still here.';
+                $status.text(message).addClass('alert alert-danger');
+                return;
+            }
+            form.reset();
+            $status.text('Thanks. Your message was submitted to the Campus Life team.').addClass('alert alert-success');
             showToast();
-        }, 1000);
+        } catch {
+            $status.text('We could not confirm the submission. Your draft is still here.')
+                .addClass('alert alert-danger');
+        } finally {
+            window.clearTimeout(timeout);
+            $actions.prop('disabled', false);
+            $submit.removeAttr('aria-busy').text('Send message');
+        }
     });
-    $form.on('input change reset', restoreButton);
-    $('#wizard-back').on('click', restoreButton);
+    form.hidden = false;
 }
 
 function setupCopyButtons($) {

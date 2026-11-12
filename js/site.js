@@ -4,13 +4,12 @@
 const contactRules = {
     fullname: { label: 'Full Name' },
     email: { label: 'Email', type: 'email' },
+    phone: { label: 'Phone', type: 'phone', optional: true, maxLength: 32 },
     subject: { label: 'Subject' },
     category: {
         label: 'Topic / Department', tagName: 'SELECT',
         choices: ['general', 'it_support', 'library', 'academic', 'feedback']
     },
-    password: { label: 'Practice password', type: 'password', minLength: 8 },
-    'confirm-password': { label: 'Confirm practice password', type: 'password', match: 'password' },
     message: { label: 'Message', tagName: 'TEXTAREA' }
 };
 const subscriptionRules = {
@@ -31,6 +30,7 @@ function validationField(form, id, rule) {
 function fieldError(field, rule, form, rules) {
     const value = rule.type === 'password' ? field.value : field.value.trim();
     if (value.trim() === '') {
+        if (rule.optional) return '';
         return rule.tagName === 'SELECT' ? 'Choose a topic / department.' : 'This field is required.';
     }
     if (rule.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
@@ -38,6 +38,15 @@ function fieldError(field, rule, form, rules) {
     }
     if (rule.minLength && value.length < rule.minLength) {
         return `Use at least ${rule.minLength} characters.`;
+    }
+    if (rule.maxLength && value.length > rule.maxLength) {
+        return `Use no more than ${rule.maxLength} characters.`;
+    }
+    if (rule.type === 'phone' && (!/^\+?[\d ().-]+$/.test(value) || !/^\d{10,15}$/.test(value.replace(/\D/g, '')))) {
+        return 'Enter a phone number with 10 to 15 digits, for example +7 700 123 45 67.';
+    }
+    if (rule.complexity && ![/[a-z]/, /[A-Z]/, /[0-9]/, /[^A-Za-z0-9\s]/].every(pattern => pattern.test(value))) {
+        return 'Include uppercase and lowercase letters, a number and a symbol.';
     }
     if (rule.choices && !rule.choices.includes(value)) {
         return 'Choose a valid topic / department.';
@@ -69,26 +78,27 @@ function setupValidation(form, status, rules, successMessage) {
         status.classList.remove('alert', 'alert-success', 'alert-danger');
     }
     form.addEventListener('submit', (event) => {
-        // This static demonstration does not send form data to a server.
         event.preventDefault();
         submitted = true;
         clearStatus();
         let firstInvalid = null;
         const unavailable = [];
+        const values = {};
         Object.entries(rules).forEach(([id, rule]) => {
             const field = validationField(form, id, rule);
             if (!field) {
                 unavailable.push(rule.label);
                 return;
             }
-            if (rule.type !== 'password') field.value = field.value.trim();
+            field.value = field.value.trim();
+            values[id] = field.value;
             const message = fieldError(field, rule, form, rules);
             showFieldError(field, message);
             if (message && !firstInvalid) firstInvalid = field;
         });
         if (unavailable.length || firstInvalid) {
             status.textContent = unavailable.length
-                ? `Required fields are missing or unavailable: ${unavailable.join(', ')}. Reload the page and try again.`
+                ? `Form fields are missing or unavailable: ${unavailable.join(', ')}. Reload the page and try again.`
                 : 'Please correct the highlighted fields and try again.';
             status.classList.add('alert', 'alert-danger');
             if (firstInvalid) {
@@ -97,14 +107,12 @@ function setupValidation(form, status, rules, successMessage) {
             }
             return;
         }
-        status.textContent = successMessage;
-        status.classList.add('alert', 'alert-success');
-        // Passwords are compared only in memory and never stored or logged.
-        Object.entries(rules).forEach(([id, rule]) => {
-            if (rule.type === 'password') validationField(form, id, rule).value = '';
-        });
+        if (successMessage) {
+            status.textContent = successMessage;
+            status.classList.add('alert', 'alert-success');
+        }
         submitted = false;
-        form.dispatchEvent(new CustomEvent('validation-success', { detail: { message: successMessage } }));
+        form.dispatchEvent(new CustomEvent('validation-success', { detail: { values } }));
     });
     // Delegation also handles a field that is replaced after the page has loaded.
     const recheck = (event) => {
@@ -115,13 +123,6 @@ function setupValidation(form, status, rules, successMessage) {
         if (submitted || field.hasAttribute('aria-invalid')) {
             showFieldError(field, fieldError(field, rule, form, rules));
         }
-        Object.entries(rules).forEach(([id, dependentRule]) => {
-            if (dependentRule.match !== field.id) return;
-            const dependent = validationField(form, id, dependentRule);
-            if (dependent && (submitted || dependent.hasAttribute('aria-invalid'))) {
-                showFieldError(dependent, fieldError(dependent, dependentRule, form, rules));
-            }
-        });
     };
     form.addEventListener('input', recheck);
     form.addEventListener('change', recheck);
@@ -135,8 +136,7 @@ function setupValidation(form, status, rules, successMessage) {
     });
 }
 
-setupValidation(document.querySelector('#contact-form'), document.querySelector('#form-status'), contactRules,
-    'All fields are valid and the passwords match. Demo complete: no account was created and no message was sent or stored.');
+setupValidation(document.querySelector('#contact-form'), document.querySelector('#form-status'), contactRules);
 setupValidation(document.querySelector('#subscription-form'), document.querySelector('#subscription-status'), subscriptionRules,
     'Subscription details are valid. Demo complete: no subscription was sent or stored.');
 

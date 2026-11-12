@@ -1,19 +1,34 @@
 # Campus Life
 
-A responsive student guide built for the Web Technologies final project at Astana IT University. It brings together study advice, campus resources, a student team profile and a contact form demonstration.
+A responsive student guide built for the Web Technologies final project at Astana IT University. It brings together study advice, campus resources, a student community, a contact form and a demo student account.
 
 ## Pages and team
 
 - `index.html` — home and study/resource introductions; Yessetaiuly Inal.
 - `about.html` — team, mission and campus photo carousel; Yessetaiuly Inal.
 - `resources.html` — resource cards, category links, study tips and directory; Nurkeldi Baizhigit.
-- `contact.html` — sample contact directory and validated demo form; Nurkeldi Baizhigit.
+- `contact.html` — sample campus directory and contact form for the project team; Nurkeldi Baizhigit.
+- `account.html` — demo registration and login with inline validation.
+- `profile.html` — signed-in student details and logout.
 
-This retains two HTML pages for each team member. Both members should understand and review all shared changes before defending the project.
+Both members should understand and review all shared changes before defending the project.
 
 ## Technologies
 
 Semantic HTML5, custom CSS, Bootstrap 5.3.8, JavaScript and jQuery 4.0.0. Bootstrap CSS, its JavaScript bundle and its MIT license are included in `vendor/bootstrap/`. The site requests jQuery from its official CDN and falls back to the identical copy in vendor/jquery. No build or package installation is required.
+
+## Project structure
+
+| Location | Contents |
+| --- | --- |
+| Root | Six HTML pages and this README |
+| `css/style.css` | Layout, components and theme variables |
+| `js/site.js` | Shared validation, FAQ, newsletter and clock |
+| `js/assignment5.js` | Theme, keyboard navigation, resource categories and contact form steps |
+| `js/script.js` | jQuery search, scroll progress, counters, form feedback and gallery loading |
+| `js/account.js` and `js/books.js` | Demo account and book catalog search |
+| `images/` and `vendor/` | Site imagery and bundled libraries |
+| `tests/`, `scripts/` and `output/` | Browser checks, report generator and earlier assignment evidence |
 
 ## Run locally
 
@@ -42,14 +57,14 @@ GitHub Pages hosts the project at this URL. Updates are published by pushing the
 
 Every HTML page links `vendor/bootstrap/bootstrap.bundle.min.js` and `js/site.js` using `defer`. Guards skip components that are absent on a particular page. Both team members are named in every footer. Group: **SE-2508**.
 
-The work continues the shared commit `43bb43a`: the original FAQ, subscription popup and contact validation were retained and extended. This revision adds inline validation (including password length and confirmation), animation, backdrop closing, the background switcher, the clock, and consistent integration. Both members should review the final changes and be able to demonstrate at least one JavaScript component.
+The work continues the shared commit `43bb43a`: the original FAQ, subscription popup and contact validation were retained and extended. Both members should review the final changes and be able to demonstrate at least one JavaScript component.
 
 ## Behavior and limitations
 
 - Navigation collapses below Bootstrap's `lg` breakpoint; the toggler and carousel use Bootstrap's bundle.
 - Resource categories jump to relevant content on the same page.
 - The carousel is manually controlled and does not auto-advance.
-- Contact and subscription validation rules are defined in JavaScript (`contactRules` and `subscriptionRules`), independently of HTML `required`, `type`, `minlength` and `data-match` attributes. Each submission re-reads the expected fields: missing, duplicated or disabled controls block success. JavaScript checks non-empty values, email format, a minimum practice password length of 8, valid topics and exact confirmation matching. Whitespace-only values are rejected. `novalidate` allows our inline messages instead of native browser bubbles. A valid submission displays an accessible status message without navigating or transmitting data. Reset clears both fields and status. Practice passwords are cleared after successful validation; do not enter real credentials. This is client-side validation; a real service must also validate requests on the server.
+- Contact and subscription validation rules are defined in JavaScript (`contactRules` and `subscriptionRules`). The forms use `novalidate` to show errors alongside their fields. Contact checks the required fields, email format, optional phone number and selected topic. The newsletter subscription is a local demo.
 - FAQ answers are hidden initially and animate open/closed over 240ms. Keyboard activation and reduced-motion preferences are supported.
 - The subscription dialog opens from Subscribe, checks name/email, and closes using the close button, Escape or the backdrop. Focus returns to Subscribe.
 - The background button cycles through four predefined colors; the clock updates every second in the visitor's device timezone.
@@ -59,8 +74,6 @@ The work continues the shared commit `43bb43a`: the original FAQ, subscription p
 ## Accessibility and layout
 
 Each page has a skip link, one main heading, semantic sections, a labeled navigation, current-page indication and descriptive image alternatives. Forms have visible labels. Tables scroll inside their containers on narrow screens. Keyboard focus remains visible, and motion preferences are respected.
-
-See `DEFENSE_RU.md` for Assignment 4 explanations, a demonstration script and live-edit practice. `DEFENSE.md` retains the earlier HTML/Bootstrap notes.
 
 ## Assignment 5: advanced JavaScript and DOM
 
@@ -78,17 +91,29 @@ See `DEFENSE_RU.md` for Assignment 4 explanations, a demonstration script and li
 | Event-triggered animations | Greeting, cards and form steps; reduced motion supported |
 | Separation | HTML markup, css/style.css, js/site.js and js/assignment5.js |
 
-Contact is a demo, not a real account or messaging endpoint. Next validates the current step; final submission validates all required fields using JavaScript rules. Back retains input and Reset returns to the first step. The old light-background control applies only in day mode. Only the theme is stored; no names, messages or passwords are persisted.
+On Contact, Next validates the current step and opens a review before sending. The final submission validates the fields again. Back retains input and Reset returns to the first step. The background control applies only in day mode.
 
 New code is in `js/assignment5.js`, loaded after the shared `js/site.js`. Run the browser regression suite with Playwright installed: `node tests/assignment5.cjs`. Optional `PLAYWRIGHT_MODULE` and `CHROME_EXECUTABLE` select existing local installations; no npm dependency is required to run the website itself. The suite starts a local server, checks the UI at 390/768/1440px, validates failure cases and captures actual browser evidence in `output/assignment5/evidence/`. Set `TEST_BASE_URL` to test a deployed copy after publication.
 
-See `DEFENSE_ASSIGNMENT5_RU.md` for a demonstration sequence and detailed explanations. Submission artifacts are in `output/pdf/` and `output/assignment5/`. Human defense and LMS submission must be completed by each team member.
+Earlier submission artifacts are in `output/pdf/` and `output/assignment5/`.
 
 ## Assignment 6: jQuery
 
 - Resources: type a title or description keyword. Suggestions are selectable with the mouse or keyboard. The results combine search and the current category, and matching terms are highlighted.
 - Home: scroll to see the reading progress and reload to replay the number counters.
-- Contact: complete the existing form with demo values to see the disabled submit button, spinner and success toast. Use Copy beside an email address to test clipboard feedback.
+- Contact: the submit button displays a spinner during the request and a success toast after Formspree accepts it. Use Copy beside an email address to test clipboard feedback.
 - About: scroll to Campus Moments and move between slides. Gallery images load when their slides enter the viewport.
 
-The new behavior is in `js/script.js`. The contact form simulates a short wait after validation and handles no real submissions.
+The jQuery behavior is in `js/script.js`.
+
+## Contact delivery
+
+The contact form posts validated fields to the Formspree endpoint in `contact.html`. Review the configured **Target Email** in the Formspree dashboard to confirm where notifications go. The browser suite intercepts Formspree requests so automated checks do not send emails.
+
+## Demo account
+
+Open Account, register with sample details, then log in to open Profile. Use HTTPS or the localhost server for browser password verification. `js/account.js` stores the name, email, phone and a salted password verifier in localStorage. Logout clears the active session. The demo works within the same browser and site address. Use sample details and a password you do not use elsewhere.
+
+## Open Library search
+
+On Resources, open **Find books**, enter a title or author, and submit. `js/books.js` requests up to five books from the public Open Library Search API. If Open Library fails, it tries the US Apple Books catalog through Apple's public Search API. The result message identifies the source. An internet connection is required for new searches.

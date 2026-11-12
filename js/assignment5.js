@@ -101,9 +101,9 @@ function setupWizard() {
     const form = document.getElementById('contact-form');
     if (!form) return;
     const steps = [
-        { title: 'About you', fields: ['fullname', 'email'] },
+        { title: 'About you', fields: ['fullname', 'email', 'phone'] },
         { title: 'Your message', fields: ['subject', 'category', 'message'] },
-        { title: 'Confirmation', fields: ['password', 'confirm-password'] }
+        { title: 'Review your message', fields: [] }
     ];
     const back = document.getElementById('wizard-back');
     const next = document.getElementById('wizard-next');
@@ -112,7 +112,20 @@ function setupWizard() {
     const progress = document.getElementById('wizard-progress-bar');
     const status = document.getElementById('form-status');
     const panels = Array.from(form.querySelectorAll('[data-wizard-step]'));
+    const reviewFields = form.querySelectorAll('[data-review-field]');
+
+    function updateReview() {
+        for (const output of reviewFields) {
+            const id = output.dataset.reviewField;
+            const field = validationField(form, id, contactRules[id]);
+            const value = id === 'category' ? field?.selectedOptions[0]?.textContent : field?.value;
+            output.textContent = value?.trim() || '';
+            output.parentElement.hidden = !output.textContent;
+        }
+    }
+
     const controller = createStepController(steps.length, (index, focus) => {
+        if (index === steps.length - 1) updateReview();
         panels.forEach(panel => {
             panel.hidden = Number(panel.dataset.wizardStep) !== index;
             if (!panel.hidden) animateEntrance(panel);
@@ -142,7 +155,7 @@ function setupWizard() {
         }
         if (missing.length || firstInvalid) {
             status.textContent = missing.length
-                ? `Required fields are missing or unavailable: ${missing.join(', ')}. Reload the page and try again.`
+                ? `Form fields are missing or unavailable: ${missing.join(', ')}. Reload the page and try again.`
                 : 'Please correct the highlighted fields before continuing.';
             status.classList.add('alert', 'alert-danger');
             if (firstInvalid) firstInvalid.focus();
@@ -163,7 +176,10 @@ function setupWizard() {
         const index = steps.findIndex(step => step.fields.includes(event.detail.field.id));
         if (index >= 0) controller.goTo(index, false);
     });
-    form.addEventListener('reset', () => controller.goTo(0));
+    form.addEventListener('reset', () => {
+        for (const output of reviewFields) output.textContent = '';
+        controller.goTo(0);
+    });
     document.getElementById('wizard-progress').hidden = false;
     controller.goTo(0, false);
 }

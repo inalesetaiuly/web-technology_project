@@ -41,8 +41,11 @@
                         <li class="nav-item"><a class="nav-link" href="about.html">Community</a></li>
                         <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="account.html">Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
                     </ul>
-                    <button type="button" class="btn theme-switch ms-lg-3 mt-2 mt-lg-0" data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
+                    <button type="button" class="btn theme-switch ms-lg-3 mt-2 mt-lg-0"
+                        data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
                 </div>
             </div>
         </nav>
@@ -51,15 +54,15 @@
     <main id="main-content" tabindex="-1" class="container flex-grow-1">
         <section class="page-heading masthead-contact" aria-labelledby="page-title">
             <div class="masthead-copy">
-                <p class="eyebrow">03 / CAMPUS SUPPORT</p>
+                <p class="eyebrow">Campus support</p>
                 <h1 class="page-title" id="page-title">Let’s talk.</h1>
-                <p class="masthead-description">Browse the student directory or try the contact form below.</p>
+                <p class="masthead-description">Browse the sample directory or send the Campus Life team a message.</p>
                 <a class="masthead-link" href="#message-section">Jump to contact form <span aria-hidden="true">↓</span></a>
             </div>
             <img class="masthead-image" src="images/contact.jpg" alt="Campus student support desk" decoding="async">
         </section>
 
-        <section id="contact-section" class="section-panel p-4 mb-4" aria-labelledby="directory-title">
+        <section id="contact-section" class="section-panel mb-4" aria-labelledby="directory-title">
             <p class="eyebrow">FIND THE RIGHT DESK</p>
             <h2 id="directory-title">Campus Directory</h2>
 
@@ -125,15 +128,14 @@
             </div>
         </section>
 
-        <section id="message-section" class="section-panel p-4" aria-labelledby="message-title">
-            <p class="eyebrow">CONTACT FORM / DEMO</p>
+        <section id="message-section" class="section-panel" aria-labelledby="message-title">
             <h2 id="message-title">Get in Touch</h2>
-            <p>Try the demo form below, including a practice password and its confirmation. No account is created and nothing is sent or stored.</p>
+            <p id="contact-delivery-note">Your message and contact details are sent to the Campus Life team through Formspree.</p>
 
-            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
-            <noscript><p class="alert alert-warning">Enable JavaScript to try the form demonstration. No messages can be delivered by this static website.</p></noscript>
-            <form id="contact-form" aria-describedby="form-note" data-validate novalidate>
-                <p id="form-note" class="small">All fields except the reply checkbox are required.</p>
+            <p id="form-status" class="form-status" role="status"></p>
+            <noscript><p class="alert alert-warning">Enable JavaScript to use the contact form.</p></noscript>
+            <form id="contact-form" action="https://formspree.io/f/xvkaownp" method="post"
+                aria-describedby="contact-delivery-note" novalidate hidden>
                 <div id="wizard-progress" class="mb-4" hidden>
                     <p id="wizard-step-label" role="status" tabindex="-1">Step 1 of 3: About you</p>
                     <progress id="wizard-progress-bar" class="wizard-progress" max="3" value="1" aria-label="Contact form progress"></progress>
@@ -142,7 +144,7 @@
                     <div class="col-12 col-md-6" data-wizard-step="0">
                         <label class="form-label" for="fullname">Full Name</label>
                         <input class="form-control" type="text" id="fullname" name="fullname"
-                            placeholder="Enter your full name" autocomplete="name" aria-describedby="fullname-error" required>
+                            autocomplete="name" aria-describedby="fullname-error" aria-required="true">
                         <p id="fullname-error" class="field-error" hidden></p>
                     </div>
 
@@ -150,22 +152,30 @@
                         <label class="form-label" for="email">Email</label>
                         <div class="input-group">
                             <span class="input-group-text" aria-hidden="true">@</span>
-                            <input class="form-control" type="email" id="email" name="email"
-                                placeholder="Enter your email" autocomplete="email" aria-describedby="email-error" required>
+                            <input class="form-control" type="text" id="email" name="email" inputmode="email"
+                                autocomplete="email" aria-describedby="email-error" aria-required="true">
                         </div>
                         <p id="email-error" class="field-error" hidden></p>
+                    </div>
+
+                    <div class="col-12 col-md-6" data-wizard-step="0">
+                        <label class="form-label" for="phone">Phone (optional)</label>
+                        <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel"
+                            placeholder="+7 700 123 45 67" aria-describedby="phone-error">
+                        <p id="phone-error" class="field-error" hidden></p>
                     </div>
 
                     <div class="col-12 col-md-6" data-wizard-step="1">
                         <label class="form-label" for="subject">Subject</label>
                         <input class="form-control" type="text" id="subject" name="subject"
-                            placeholder="Enter subject" aria-describedby="subject-error" required>
+                            aria-describedby="subject-error" aria-required="true">
                         <p id="subject-error" class="field-error" hidden></p>
                     </div>
 
                     <div class="col-12 col-md-6" data-wizard-step="1">
                         <label class="form-label" for="category">Topic / Department</label>
-                        <select class="form-select" id="category" name="category" aria-describedby="category-error" required>
+                        <select class="form-select" id="category" name="category"
+                            aria-describedby="category-error" aria-required="true">
                             <option value="" selected disabled>-- Select an option --</option>
                             <option value="general">General Question</option>
                             <option value="it_support">IT Support</option>
@@ -176,40 +186,29 @@
                         <p id="category-error" class="field-error" hidden></p>
                     </div>
 
-                    <div class="col-12 col-md-6" data-wizard-step="2">
-                        <label class="form-label" for="password">Practice password</label>
-                        <input class="form-control" type="password" id="password" name="password" minlength="8"
-                            autocomplete="new-password" aria-describedby="password-help password-error" required>
-                        <p id="password-help" class="small mt-1 mb-0">At least 8 characters. Use a made-up password for this demo.</p>
-                        <p id="password-error" class="field-error" hidden></p>
-                    </div>
-
-                    <div class="col-12 col-md-6" data-wizard-step="2">
-                        <label class="form-label" for="confirm-password">Confirm practice password</label>
-                        <input class="form-control" type="password" id="confirm-password" name="confirmPassword"
-                            autocomplete="new-password" data-match="password" aria-describedby="confirm-password-error" required>
-                        <p id="confirm-password-error" class="field-error" hidden></p>
-                    </div>
-
                     <div class="col-12" data-wizard-step="1">
                         <label class="form-label" for="message">Message</label>
                         <textarea class="form-control" id="message" name="message" rows="5"
-                            placeholder="Write your message here..." aria-describedby="message-error" required></textarea>
+                            aria-describedby="message-error" aria-required="true"></textarea>
                         <p id="message-error" class="field-error" hidden></p>
                     </div>
 
-                    <div class="col-12" data-wizard-step="2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="yes" id="followup" name="followup">
-                            <label class="form-check-label" for="followup">I would like a reply by email (demo preference).</label>
-                        </div>
+                    <div class="col-12" data-wizard-step="2" hidden>
+                        <dl class="detail-list">
+                            <div><dt>Full name</dt><dd data-review-field="fullname"></dd></div>
+                            <div><dt>Email</dt><dd data-review-field="email"></dd></div>
+                            <div><dt>Phone</dt><dd data-review-field="phone"></dd></div>
+                            <div><dt>Subject</dt><dd data-review-field="subject"></dd></div>
+                            <div><dt>Topic / Department</dt><dd data-review-field="category"></dd></div>
+                            <div><dt>Message</dt><dd class="contact-review-message" data-review-field="message"></dd></div>
+                        </dl>
                     </div>
 
                     <div class="col-12">
                         <div class="d-flex flex-wrap gap-2 justify-content-center" role="group" aria-label="Form actions">
                             <button id="wizard-back" class="btn btn-outline-primary btn-lg" type="button" hidden>Back</button>
                             <button id="wizard-next" class="btn btn-primary btn-lg" type="button" hidden>Next</button>
-                            <button id="wizard-submit" class="btn btn-primary btn-lg" type="submit">Check message</button>
+                            <button id="wizard-submit" class="btn btn-primary btn-lg" type="submit" hidden>Send message</button>
                             <button class="btn btn-outline-secondary btn-lg" type="reset">Clear Form</button>
                         </div>
                     </div>
@@ -217,10 +216,10 @@
             </form>
         </section>
 
-        <section id="newsletter-section" class="section-panel p-4 mt-4" aria-labelledby="newsletter-title">
+        <section id="newsletter-section" class="section-panel mt-4" aria-labelledby="newsletter-title">
             <p class="tool-label">Stay in the loop</p>
             <h2 id="newsletter-title">Campus Newsletter</h2>
-            <p>Try a quick subscription to updates on student events and resources.</p>
+            <p>Try the demo subscription form for campus updates.</p>
             <button type="button" id="open-popup" class="btn btn-primary" aria-haspopup="dialog">Subscribe</button>
         </section>
     </main>
@@ -267,6 +266,8 @@
                     <a href="resources.html">Explore resources <span aria-hidden="true">↗</span></a>
                     <a href="about.html">Meet the team <span aria-hidden="true">↗</span></a>
                     <a href="contact.html">Get in touch <span aria-hidden="true">↗</span></a>
+                    <a href="account.html">Account <span aria-hidden="true">↗</span></a>
+                    <a href="profile.html">Profile <span aria-hidden="true">↗</span></a>
                 </nav>
             </div>
             <div class="footer-meta">
