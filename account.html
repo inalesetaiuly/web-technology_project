@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Create a demo Campus Life account or log in to your student profile.">
+    <title>Campus Life | Account</title>
+    <link rel="icon" href="images/campus-mark.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="vendor/jquery/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
+</head>
+
+<body class="page-account d-flex flex-column min-vh-100">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="reading-progress" role="progressbar" aria-label="Page scroll progress"
+        aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+        <div class="reading-progress-fill"></div>
+    </div>
+
+    <header>
+        <nav aria-label="Main navigation" class="navbar navbar-expand-lg site-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/campus-mark.svg" width="36" height="36" alt="">
+                    <span>Campus<span class="brand-space"> Life</span></span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">Community</a></li>
+                        <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="account.html">Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                    </ul>
+                    <button type="button" class="btn theme-switch ms-lg-3 mt-2 mt-lg-0"
+                        data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1" class="container flex-grow-1">
+        <section class="page-heading" aria-labelledby="page-title">
+            <div class="masthead-copy">
+                <h1 class="page-title" id="page-title">Campus account.</h1>
+                <p class="masthead-description">Create a demo account to open your student profile. Use sample details and a password you don’t use elsewhere.</p>
+                <a class="masthead-link" href="#log-in" data-login-link hidden>Already registered? Log in <span aria-hidden="true">↓</span></a>
+                <a class="masthead-link" href="profile.html" data-active-profile hidden>Open your profile <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="account-masthead-photo">
+                <img class="masthead-image" src="images/studypng.png" alt="Students working in a campus study space" decoding="async">
+            </div>
+        </section>
+
+        <noscript><p class="alert alert-warning">Enable JavaScript to use the account demo.</p></noscript>
+        <p id="account-unavailable" class="alert alert-warning" role="status" hidden></p>
+        <div id="account-forms" class="row g-4" hidden>
+            <section class="col-12 col-md-6" aria-labelledby="signup-title">
+                <div class="section-panel h-100">
+                    <h2 id="signup-title">Sign up</h2>
+                    <p class="text-body-secondary">Your details are saved in this browser.</p>
+                    <form id="signup-form" class="d-grid gap-3" method="post" novalidate>
+                        <div>
+                            <label class="form-label" for="signup-name">Full name</label>
+                            <input class="form-control" id="signup-name" name="name" autocomplete="name"
+                                aria-describedby="signup-name-error">
+                            <p id="signup-name-error" class="field-error" hidden></p>
+                        </div>
+                        <div>
+                            <label class="form-label" for="signup-email">Email</label>
+                            <input class="form-control" id="signup-email" name="email" inputmode="email"
+                                autocomplete="email" aria-describedby="signup-email-error">
+                            <p id="signup-email-error" class="field-error" hidden></p>
+                        </div>
+                        <div>
+                            <label class="form-label" for="signup-phone">Phone</label>
+                            <input class="form-control" type="tel" id="signup-phone" name="phone"
+                                autocomplete="tel" placeholder="+7 700 123 45 67" aria-describedby="signup-phone-error">
+                            <p id="signup-phone-error" class="field-error" hidden></p>
+                        </div>
+                        <div>
+                            <label class="form-label" for="signup-password">Password</label>
+                            <input class="form-control" type="password" id="signup-password" name="password"
+                                autocomplete="new-password" aria-describedby="signup-password-help signup-password-error">
+                            <p id="signup-password-help" class="small text-body-secondary mt-1 mb-0">
+                                Use at least 8 characters with uppercase and lowercase letters, a number and a symbol.
+                            </p>
+                            <p id="signup-password-error" class="field-error" hidden></p>
+                        </div>
+                        <div>
+                            <label class="form-label" for="signup-confirm">Confirm password</label>
+                            <input class="form-control" type="password" id="signup-confirm" name="confirm"
+                                autocomplete="new-password" aria-describedby="signup-confirm-error">
+                            <p id="signup-confirm-error" class="field-error" hidden></p>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Create account</button>
+                        <p class="form-status mb-0" role="status"></p>
+                    </form>
+                </div>
+            </section>
+
+            <section class="col-12 col-md-6" id="log-in" aria-labelledby="login-title">
+                <div class="section-panel">
+                    <h2 id="login-title">Log in</h2>
+                    <p class="text-body-secondary">Open your profile using the account you created in this browser.</p>
+                    <p id="login-notice" class="alert alert-success" role="status" hidden></p>
+                    <form id="login-form" class="d-grid gap-3" method="post" novalidate>
+                        <div>
+                            <label class="form-label" for="login-email">Email</label>
+                            <input class="form-control" id="login-email" name="email" inputmode="email"
+                                autocomplete="username" aria-describedby="login-email-error">
+                            <p id="login-email-error" class="field-error" hidden></p>
+                        </div>
+                        <div>
+                            <label class="form-label" for="login-password">Password</label>
+                            <input class="form-control" type="password" id="login-password" name="password"
+                                autocomplete="current-password" aria-describedby="login-password-error">
+                            <p id="login-password-error" class="field-error" hidden></p>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Log in</button>
+                        <p class="form-status mb-0" role="status"></p>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer mt-auto">
+        <div class="container">
+            <div class="footer-main">
+                <div>
+                    <a class="footer-brand" href="index.html"><img src="images/campus-mark.svg" width="36" height="36" alt="">Campus Life</a>
+                    <p class="footer-description">A student field guide to finding your place on campus.</p>
+                </div>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="resources.html">Explore resources <span aria-hidden="true">↗</span></a>
+                    <a href="about.html">Meet the team <span aria-hidden="true">↗</span></a>
+                    <a href="contact.html">Get in touch <span aria-hidden="true">↗</span></a>
+                    <a href="account.html">Account <span aria-hidden="true">↗</span></a>
+                    <a href="profile.html">Profile <span aria-hidden="true">↗</span></a>
+                </nav>
+            </div>
+            <div class="footer-meta">
+                <span>ASTANA IT UNIVERSITY · STUDENT PROJECT</span>
+                <span>Yessetaiuly Inal &amp; Nurkeldi Baizhigit</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <script src="js/site.js" defer></script>
+    <script src="js/assignment5.js" defer></script>
+    <script src="js/account.js" defer></script>
+</body>
+
+</html>

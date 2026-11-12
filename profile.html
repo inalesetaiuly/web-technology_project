@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="View your Campus Life student profile and find campus resources.">
+    <title>Campus Life | Profile</title>
+    <link rel="icon" href="images/campus-mark.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="vendor/jquery/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
+</head>
+
+<body class="page-profile d-flex flex-column min-vh-100">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="reading-progress" role="progressbar" aria-label="Page scroll progress"
+        aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+        <div class="reading-progress-fill"></div>
+    </div>
+
+    <header>
+        <nav aria-label="Main navigation" class="navbar navbar-expand-lg site-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/campus-mark.svg" width="36" height="36" alt="">
+                    <span>Campus<span class="brand-space"> Life</span></span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">Community</a></li>
+                        <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="account.html">Account</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="profile.html">Profile</a></li>
+                    </ul>
+                    <button type="button" class="btn theme-switch ms-lg-3 mt-2 mt-lg-0"
+                        data-theme-toggle aria-pressed="false" aria-label="Switch to night theme" hidden>Night theme</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1" class="container flex-grow-1">
+        <section class="page-heading masthead-profile" aria-labelledby="page-title">
+            <div class="masthead-copy">
+                <h1 class="page-title" id="page-title">Your profile.</h1>
+                <p class="masthead-description">See the details from your Campus Life account.</p>
+            </div>
+            <div class="account-masthead-photo">
+                <img class="masthead-image" src="images/library.png" alt="Shelves inside the university library" decoding="async">
+            </div>
+        </section>
+
+        <div class="row g-4">
+            <div class="col-12 col-lg-8">
+                <section id="profile-guest" class="section-panel" aria-labelledby="guest-title">
+                    <h2 id="guest-title">Log in to view your profile</h2>
+                    <p>Open your account to see your student details.</p>
+                    <p id="profile-guest-status" class="form-status" role="status"></p>
+                    <a class="btn btn-primary" href="account.html#log-in">Go to account</a>
+                </section>
+                <section id="profile-details" class="section-panel" aria-labelledby="profile-title" hidden>
+                    <h2 id="profile-title">Account details</h2>
+                    <dl class="detail-list">
+                        <div>
+                            <dt>Name</dt>
+                            <dd data-profile-field="name"></dd>
+                        </div>
+                        <div>
+                            <dt>Email</dt>
+                            <dd data-profile-field="email"></dd>
+                        </div>
+                        <div>
+                            <dt>Phone</dt>
+                            <dd data-profile-field="phone"></dd>
+                        </div>
+                    </dl>
+                    <button class="btn btn-outline-primary" type="button" id="logout-button">Log out</button>
+                    <p id="logout-status" class="form-status mt-3 mb-0" role="status"></p>
+                </section>
+            </div>
+            <aside class="col-12 col-lg-4" aria-labelledby="profile-links-title">
+                <div class="section-panel">
+                    <h2 class="h4" id="profile-links-title">Explore campus</h2>
+                    <ul class="mb-0 ps-3">
+                        <li><a href="resources.html#study-spaces">Find a study space</a></li>
+                        <li><a href="about.html">Meet the community</a></li>
+                        <li><a href="contact.html">Find student support</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer mt-auto">
+        <div class="container">
+            <div class="footer-main">
+                <div>
+                    <a class="footer-brand" href="index.html"><img src="images/campus-mark.svg" width="36" height="36" alt="">Campus Life</a>
+                    <p class="footer-description">A student field guide to finding your place on campus.</p>
+                </div>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="resources.html">Explore resources <span aria-hidden="true">↗</span></a>
+                    <a href="about.html">Meet the team <span aria-hidden="true">↗</span></a>
+                    <a href="contact.html">Get in touch <span aria-hidden="true">↗</span></a>
+                    <a href="account.html">Account <span aria-hidden="true">↗</span></a>
+                    <a href="profile.html">Profile <span aria-hidden="true">↗</span></a>
+                </nav>
+            </div>
+            <div class="footer-meta">
+                <span>ASTANA IT UNIVERSITY · STUDENT PROJECT</span>
+                <span>Yessetaiuly Inal &amp; Nurkeldi Baizhigit</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <script src="js/site.js" defer></script>
+    <script src="js/assignment5.js" defer></script>
+    <script src="js/account.js" defer></script>
+</body>
+
+</html>
